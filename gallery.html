@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LS Nails Studio</title>
+  <link rel="icon" href="images/LOGO.png" type="image/png">
+  <meta name="description" content="View the complete nail art and beauty portfolio of LS Nails Studio.">
+
+  <!-- Premium Font Stack -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP Core & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            theme: {
+              bg: '#F0EFEB',
+              surface: '#D7D4C8',
+              text: '#111111',
+              accent: '#6B705C'
+            }
+          },
+          fontFamily: {
+            display: ['Clash Display', 'sans-serif'],
+            body: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F0EFEB;
+      color: #111111;
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background-color: #6B705C;
+      color: #F0EFEB;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Clash Display', sans-serif;
+    }
+
+    /* Fluid Island Nav (Dark Glass) */
+    .nav-glass {
+      background: rgba(240, 239, 235, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    /* GSAP Base States */
+    .gsap-reveal {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      filter: blur(12px);
+    }
+
+    /* Noise Texture */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    }
+
+
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <div class="noise-overlay"></div>
+
+  <!-- ══ FLUID ISLAND NAV (Minimal) ══════════════════════════════ -->
+  <header class="fixed top-6 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
+    <div
+      class="pointer-events-auto nav-glass rounded-full px-6 py-3 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-white/10 w-full max-w-5xl">
+      <a href="index.html" class="flex-shrink-0 relative flex items-center gap-3 group">
+        <img src="images/LOGO.png" alt="LS"
+          class="h-6 w-auto mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+          onerror="this.src='images/logo_white.jpg';" />
+        <span
+          class="text-[13px] font-display font-medium tracking-[0.15em] uppercase text-theme-text/90 group-hover:text-theme-text transition-colors duration-300 mt-[2px] hidden sm:block">
+          NAILS
+          STUDIO</span>
+      </a>
+
+      <ul class="flex items-center">
+        <li>
+          <a href="index.html"
+            class="group cta-btn inline-flex items-center justify-center bg-theme-text text-theme-bg pl-6 pr-2 py-2 rounded-full hover:bg-theme-text/90 transition-colors duration-300">
+            <span class="text-[13px] tracking-wide font-medium uppercase mr-4">Back to Studio</span>
+            <div
+              class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-x-[2px] group-hover:scale-105">
+              <i class="ph ph-arrow-left text-sm"></i>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ══ EDITORIAL HERO HEADER ════════════════════════════════════ -->
+  <section class="pt-48 pb-20 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="flex flex-col md:flex-row items-end justify-between gap-12">
+
+        <div class="max-w-3xl">
+          <div class="gsap-header inline-flex items-center gap-2 mb-8 opacity-0">
+            <span class="w-8 h-[1px] bg-theme-text/30"></span>
+            <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-theme-text/60">Archive</span>
+          </div>
+
+          <h1
+            class="gsap-header opacity-0 text-[14vw] md:text-[8rem] lg:text-[10rem] font-display font-medium leading-[0.8] tracking-[-0.04em] text-theme-text mb-6">
+            Gallery
+          </h1>
+        </div>
+
+        <div class="gsap-header opacity-0 pb-4 max-w-xs">
+          <p class="text-lg text-theme-text/60 leading-relaxed">
+            A comprehensive visual record of our precision nail art and beauty disciplines.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MASONRY GALLERY ═══════════════════════════════════════ -->
+  <section class="pb-32 lg:pb-48">
+    <div class="max-w-[95%] xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/heloooo.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_0017.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_0019.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_1857.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_1858.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_1859.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_1861.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_4207.JPG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_4971.JPG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_7292.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_7658.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_7838.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_7839.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_8086.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_8088.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_8089.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_8240.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_8783.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_8888.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_9284.JPG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_9452.JPG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG_9874.PNG" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG-20260913-WA0036.jpg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG-20260913-WA0037.jpg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG-20260913-WA0038.jpg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG-20260913-WA0039.jpg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG-20260913-WA0040.jpg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG-20260913-WA0049.jpg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/IMG-20260913-WA0050.jpg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+        <div class="gsap-reveal group">
+          <div class="p-1 rounded-[1.5rem] bg-theme-surface/50 border border-white/5 shadow-2xl h-full">
+            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-black h-full aspect-[4/5]">
+              <img src="images/imgnew.jpeg" loading="lazy" alt="Nail Art"
+                class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ FLOATING WHATSAPP BUTTON ══════════════════════════════ -->
+  <a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer"
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-3 group" aria-label="Chat on WhatsApp">
+    <span
+      class="bg-white text-[#111] text-sm font-medium px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none hidden sm:block">
+      Chat now
+    </span>
+    <div
+      class="w-14 h-14 bg-[#111] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 relative border border-white/20">
+      <i class="ph ph-whatsapp-logo text-3xl"></i>
+      <span class="absolute top-0 right-0 flex h-3.5 w-3.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 border-2 border-[#111]"></span>
+      </span>
+    </div>
+  </a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero animation
+      gsap.to('.gsap-header', {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.15,
+        ease: "power4.out",
+        delay: 0.2
+      });
+
+      // Cinematic fade-up reveals for gallery items
+      const revealElements = document.querySelectorAll('.gsap-reveal');
+
+      ScrollTrigger.batch(revealElements, {
+        onEnter: batch => gsap.to(batch, {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          filter: 'blur(0px)',
+          duration: 1.4,
+          stagger: 0.1,
+          ease: "power3.out"
+        }),
+        start: "top 90%",
+      });
+    });
+  </script>
+</body>
+
+</html>
