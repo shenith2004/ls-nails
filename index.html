@@ -51,6 +51,7 @@
       --section-py: clamp(3rem, 5.5vw, 5rem);
       --content-px: clamp(1.25rem, 3.5vw, 2.5rem);
       --marquee-band-height: 45px;
+      --hero-edge-rgb: 247, 243, 237;
     }
 
     body {
@@ -107,11 +108,13 @@
     }
 
     /* ── GSAP init states ── */
-    .gsap-reveal {
+    /* Keep content visible unless the animation library is available. */
+    .gsap-ready .gsap-reveal {
       opacity: 0;
       transform: translateY(32px);
       filter: blur(6px);
     }
+    .gsap-ready .hero-animated { opacity: 0; }
 
     /* ── Noise overlay ── */
     .noise-overlay {
@@ -156,24 +159,27 @@
 
     /* ══ HERO ══ */
     .hero-section {
-      min-height: calc(100vh - var(--marquee-band-height));
+      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: minmax(260px, min(42vh, 400px)) auto;
+      background-color: #F7F3ED;
     }
     @supports (height: 100svh) {
-      .hero-section { min-height: calc(100svh - var(--marquee-band-height)); }
+      .hero-section { min-height: 100svh; }
     }
     @media (min-width: 1024px) {
+      :root { --hero-edge-rgb: 240, 239, 235; }
       .hero-section {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
-        min-height: max(clamp(560px, 82vh, 760px), calc(100vh - var(--marquee-band-height)));
+        min-height: max(clamp(560px, 82vh, 760px), 100vh);
+        background-color: #F0EFEB;
       }
     }
     @supports (height: 100svh) {
       @media (min-width: 1024px) {
-        .hero-section { min-height: max(clamp(560px, 82vh, 760px), calc(100svh - var(--marquee-band-height))); }
+        .hero-section { min-height: max(clamp(560px, 82vh, 760px), 100svh); }
       }
     }
 
@@ -197,6 +203,12 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(
+        to bottom,
+        rgb(var(--hero-edge-rgb)) 0%,
+        rgba(var(--hero-edge-rgb), 0.82) 3%,
+        rgba(var(--hero-edge-rgb), 0) 12%
+      ),
+      linear-gradient(
         to right,
         rgba(17, 12, 10, 0.18) 0%,
         transparent 40%
@@ -326,32 +338,32 @@
   </div>
 
   <!-- ══ HERO ════════════════════════════════════════════════════ -->
-  <section id="home" class="hero-section">
+  <section id="home" class="hero-section pt-[90px] lg:pt-[100px]">
 
     <!-- Left: Typography Panel -->
-    <div class="relative flex flex-col justify-center pt-24 sm:pt-28 lg:pt-24 pb-8 sm:pb-10 lg:pb-12 px-6 sm:px-10 lg:px-12 xl:px-14 bg-theme-bg lg:bg-[#F0EFEB] order-2 lg:order-1">
+    <div class="relative flex flex-col justify-center py-8 sm:py-10 lg:py-12 px-6 sm:px-10 lg:px-12 xl:px-14 bg-theme-bg lg:bg-[#F0EFEB] order-2 lg:order-1">
 
       <!-- Floating ambient circle -->
       <div class="absolute top-20 right-0 w-64 h-64 rounded-full bg-[#B8926A]/5 blur-3xl pointer-events-none"></div>
 
       <div class="relative z-10 max-w-xl mx-auto lg:mx-0">
-        <div id="hero-tag" class="pill-tag mb-5 sm:mb-6 opacity-0">
+        <div id="hero-tag" class="pill-tag mb-5 sm:mb-6 hero-animated">
           <span class="w-1.5 h-1.5 rounded-full bg-[#B8926A] inline-block"></span>
           London's Premier Nail Studio
         </div>
 
-        <h1 id="hero-h1" class="font-display font-medium heading-hero text-theme-text mb-4 sm:mb-5 opacity-0">
+        <h1 id="hero-h1" class="font-display font-medium heading-hero text-theme-text mb-4 sm:mb-5 hero-animated">
           Let your<br>
           nails do the<br>
           <span style="color: #B8926A;">talking.</span>
         </h1>
 
-        <p id="hero-sub" class="text-sm sm:text-base text-theme-text/60 leading-relaxed max-w-[38ch] mb-6 sm:mb-8 opacity-0">
+        <p id="hero-sub" class="text-sm sm:text-base text-theme-text/60 leading-relaxed max-w-[38ch] mb-6 sm:mb-8 hero-animated">
           A quiet space dedicated to precision nail work, lash extensions, and waxing. No rush. No noise.
           Just meticulous craft.
         </p>
 
-        <div id="hero-ctas" class="flex flex-wrap gap-3 sm:gap-4 items-center opacity-0">
+        <div id="hero-ctas" class="flex flex-wrap gap-3 sm:gap-4 items-center hero-animated">
           <a href="#contact" class="group cta-btn inline-flex items-center justify-center bg-[#B8926A] text-white pl-6 sm:pl-7 pr-2 py-2.5 sm:py-3 rounded-full hover:bg-[#9B7850] transition-colors duration-300">
             <span class="text-xs sm:text-[13px] tracking-wide font-medium uppercase mr-4 sm:mr-5">Book Appointment</span>
             <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-hover:scale-105">
@@ -365,7 +377,7 @@
         </div>
 
         <!-- Stats Row -->
-        <div id="hero-stats" class="flex gap-6 sm:gap-8 mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-theme-text/10 opacity-0">
+        <div id="hero-stats" class="flex gap-6 sm:gap-8 mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-theme-text/10 hero-animated">
           <div>
             <p class="text-xl sm:text-2xl font-display font-medium text-theme-text">5+</p>
             <p class="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-theme-text/40 mt-0.5">Years crafting</p>
@@ -854,6 +866,8 @@
       window.closeMenu = () => { if (isMenuOpen) toggleMenu(); };
 
       // ── 2. Hero entrance animation (GSAP) ───────────────────────
+      if (window.gsap && window.ScrollTrigger) {
+      document.body.classList.add('gsap-ready');
       gsap.registerPlugin(ScrollTrigger);
 
       const heroTl = gsap.timeline({ delay: 0.1 });
@@ -898,6 +912,7 @@
           });
         }
       });
+      }
 
       // ── 5. Navbar hide on scroll ────────────────────────────────────
       const header = document.getElementById('main-header');
