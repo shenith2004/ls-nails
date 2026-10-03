@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LS Nails Studio</title>
+  <title>LS Nails Studio — Premium Nail Art & Beauty London</title>
   <link rel="icon" href="images/LOGO.png" type="image/png">
-  <meta name="description" content="A premium nail and beauty studio in London.">
+  <meta name="description" content="LS Nails Studio — a premium nail art, lash extensions, and waxing studio. Precision craft in a quiet, intentional space.">
 
   <!-- Premium Font Stack -->
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap" rel="stylesheet">
@@ -28,10 +28,12 @@
         extend: {
           colors: {
             theme: {
-              bg: '#F0EFEB',
-              surface: '#D7D4C8',
-              text: '#111111',
-              accent: '#6B705C'
+              bg: '#F7F3ED',
+              surface: '#EDE3D6',
+              text: '#1E140A',
+              accent: '#B8926A',
+              wine: '#B8926A',
+              wine2: '#9B7850',
             }
           },
           fontFamily: {
@@ -44,9 +46,16 @@
   </script>
 
   <style>
+    :root {
+      --container-max: 1200px;
+      --section-py: clamp(3rem, 5.5vw, 5rem);
+      --content-px: clamp(1.25rem, 3.5vw, 2.5rem);
+      --marquee-band-height: 45px;
+    }
+
     body {
-      background-color: #F0EFEB;
-      color: #111111;
+      background-color: #F7F3ED;
+      color: #1E140A;
       font-family: 'Outfit', sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -54,144 +63,250 @@
     }
 
     ::selection {
-      background-color: #6B705C;
-      color: #F0EFEB;
+      background-color: #B8926A;
+      color: #F7F3ED;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
       font-family: 'Clash Display', sans-serif;
     }
 
-    /* Fluid Island Nav */
+    section[id] {
+      scroll-margin-top: 90px;
+    }
+
+    /* ── Standardized Section & Container System ── */
+    .site-container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--content-px);
+    }
+
+    .section-flow {
+      padding-block: var(--section-py);
+    }
+
+    .heading-hero {
+      font-size: clamp(2.35rem, 5vw, 4.15rem);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+    }
+
+    .heading-section {
+      font-size: clamp(2rem, 3.8vw, 3.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+    }
+
+    /* ── Navbar ── */
     .nav-glass {
-      background: rgba(240, 239, 235, 0.85);
+      background: rgba(247, 243, 237, 0.92);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
 
-    /* GSAP Base States */
+    /* ── GSAP init states ── */
     .gsap-reveal {
       opacity: 0;
-      transform: translateY(40px);
-      filter: blur(8px);
+      transform: translateY(32px);
+      filter: blur(6px);
     }
 
-    /* Double Bezel Card Core highlight */
-    .bezel-core {
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
-    }
-
-    /* Mobile Menu Overlay */
-    #mobile-menu {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-
-    #mobile-menu.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .menu-link-wrapper {
-      overflow: hidden;
-    }
-
-    .menu-link {
-      display: block;
-      transform: translateY(100%);
-      transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-
-    #mobile-menu.open .menu-link {
-      transform: translateY(0);
-    }
-
-    /* Hamburger Morph */
-    .hamburger-line {
-      transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.4s ease;
-      transform-origin: center;
-    }
-
-    /* Noise Texture */
+    /* ── Noise overlay ── */
     .noise-overlay {
       position: fixed;
       inset: 0;
       z-index: 50;
       pointer-events: none;
-      opacity: 0.03;
+      opacity: 0.032;
       background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
     }
 
-    /* Magnetic CTA specific */
-    .cta-btn {
-      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    #mobile-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .menu-link-wrapper { overflow: hidden; }
+    .menu-link {
+      display: block;
+      transform: translateY(100%);
+      transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    #mobile-menu.open .menu-link { transform: translateY(0); }
+
+    /* ── Hamburger ── */
+    .hamburger-line {
+      transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.4s ease;
+      transform-origin: center;
     }
 
-    .cta-btn:active {
-      transform: scale(0.97);
+    /* ── CTA button ── */
+    .cta-btn { transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1); }
+    .cta-btn:active { transform: scale(0.97); }
+
+    /* ── Bezel core ── */
+    .bezel-core { box-shadow: inset 0 1px 1px rgba(255,255,255,0.4); }
+
+    /* ══ HERO ══ */
+    .hero-section {
+      min-height: calc(100vh - var(--marquee-band-height));
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(260px, min(42vh, 400px)) auto;
+    }
+    @supports (height: 100svh) {
+      .hero-section { min-height: calc(100svh - var(--marquee-band-height)); }
+    }
+    @media (min-width: 1024px) {
+      .hero-section {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        min-height: max(clamp(560px, 82vh, 760px), calc(100vh - var(--marquee-band-height)));
+      }
+    }
+    @supports (height: 100svh) {
+      @media (min-width: 1024px) {
+        .hero-section { min-height: max(clamp(560px, 82vh, 760px), calc(100svh - var(--marquee-band-height))); }
+      }
     }
 
-    /* Horizontal Pan Wrapper */
-    .h-pan-wrapper {
-      width: 300vw;
-      /* Adjust based on image count */
-      will-change: transform;
+    .hero-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* Subtle vignette on hero image */
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(17, 12, 10, 0.18) 0%,
+        transparent 40%
+      ),
+      linear-gradient(
+        to top,
+        rgba(17, 12, 10, 0.35) 0%,
+        transparent 50%
+      );
+      pointer-events: none;
+    }
+
+    /* pill tag */
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(184, 146, 106, 0.1);
+      border: 1px solid rgba(184, 146, 106, 0.25);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #9B7850;
+    }
+
+    /* Floating stat card */
+    .stat-card {
+      background: rgba(247, 243, 237, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 1rem;
+      padding: 12px 18px;
+      box-shadow: 0 8px 32px rgba(30,20,10,0.1);
+    }
+
+    /* Marquee */
+    @keyframes marquee-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-left 22s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    /* Gallery pin / horizontal scroll */
+    #gallery-pin-wrapper { position: relative; }
+    .h-pan-wrapper { will-change: transform; }
+
+    /* Section labels */
+    .label-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .label-line span.line {
+      display: inline-block;
+      width: 1.75rem;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.3;
+    }
+    .label-text {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      opacity: 0.6;
     }
   </style>
 </head>
 
 <body class="antialiased">
-
   <div class="noise-overlay"></div>
 
-  <!-- ══ FLUID ISLAND NAV ══════════════════════════════ -->
-  <header class="fixed top-6 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
-    <div
-      class="pointer-events-auto nav-glass rounded-full px-6 py-3 flex items-center justify-between shadow-[0_8px_32px_rgba(17,17,17,0.04)] border border-white/20 w-full max-w-5xl">
-      <a href="#home" class="flex-shrink-0 relative flex items-center gap-3 group">
-        <img src="images/LOGO.png" alt="LS"
+  <!-- ══ NAVBAR ══════════════════════════════════════════════════ -->
+  <header id="main-header" class="fixed top-4 sm:top-5 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none transition-transform duration-500">
+    <div class="pointer-events-auto nav-glass rounded-full px-5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between shadow-[0_8px_32px_rgba(17,17,17,0.06)] border border-white/30 w-full max-w-5xl">
+      <a href="#home" class="flex-shrink-0 flex items-center gap-3 group">
+        <img src="images/LOGO.png" alt="LS Nails Studio logo"
           class="h-6 w-auto mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-          onerror="this.src='images/logo_white.jpg';" />
-        <span
-          class="text-[13px] font-display font-medium tracking-[0.15em] uppercase text-theme-text/90 group-hover:text-theme-text transition-colors duration-300 mt-[2px] hidden sm:block">
+          onerror="this.style.display='none'" />
+        <span class="text-[13px] font-display font-medium tracking-[0.15em] uppercase text-theme-text/90 group-hover:text-theme-text transition-colors duration-300 mt-[2px]">
           NAILS STUDIO</span>
       </a>
 
       <!-- Desktop Nav -->
-      <ul class="hidden md:flex items-center space-x-10">
-        <li><a href="#services"
-            class="text-[13px] tracking-wide font-medium text-theme-text/70 hover:text-theme-text transition-colors duration-300 uppercase">Services</a>
-        </li>
-        <li><a href="#portfolio"
-            class="text-[13px] tracking-wide font-medium text-theme-text/70 hover:text-theme-text transition-colors duration-300 uppercase">Portfolio</a>
-        </li>
-        <li><a href="gallery.html"
-            class="text-[13px] tracking-wide font-medium text-theme-text/70 hover:text-theme-text transition-colors duration-300 uppercase">Gallery</a>
-        </li>
-        <li><a href="#studio"
-            class="text-[13px] tracking-wide font-medium text-theme-text/70 hover:text-theme-text transition-colors duration-300 uppercase">Studio</a>
-        </li>
+      <ul class="hidden md:flex items-center space-x-8 lg:space-x-10">
+        <li><a href="#services" class="text-[13px] tracking-wide font-medium text-theme-text/60 hover:text-theme-text transition-colors duration-300 uppercase">Services</a></li>
+        <li><a href="#portfolio" class="text-[13px] tracking-wide font-medium text-theme-text/60 hover:text-theme-text transition-colors duration-300 uppercase">Portfolio</a></li>
+        <li><a href="gallery.html" class="text-[13px] tracking-wide font-medium text-theme-text/60 hover:text-theme-text transition-colors duration-300 uppercase">Gallery</a></li>
+        <li><a href="#studio" class="text-[13px] tracking-wide font-medium text-theme-text/60 hover:text-theme-text transition-colors duration-300 uppercase">Studio</a></li>
         <li>
-          <a href="#contact"
-            class="group cta-btn inline-flex items-center justify-center bg-theme-text text-theme-bg pl-6 pr-2 py-2 rounded-full hover:bg-theme-text/90 transition-colors duration-300">
-            <span class="text-[13px] tracking-wide font-medium uppercase mr-4">Book</span>
-            <div
-              class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:scale-105">
-              <i class="ph ph-arrow-up-right text-sm"></i>
+          <a href="#contact" class="group cta-btn inline-flex items-center justify-center bg-theme-wine text-white pl-5 sm:pl-6 pr-2 py-1.5 sm:py-2 rounded-full hover:bg-theme-wine2 transition-colors duration-300">
+            <span class="text-xs sm:text-[13px] tracking-wide font-medium uppercase mr-3 sm:mr-4">Book</span>
+            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:scale-105">
+              <i class="ph ph-arrow-up-right text-xs sm:text-sm"></i>
             </div>
           </a>
         </li>
       </ul>
 
       <!-- Mobile Hamburger -->
-      <button id="hamburger"
-        class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-[4px] relative focus:outline-none z-50">
+      <button id="hamburger" type="button" aria-label="Open navigation menu" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-[4px] relative focus:outline-none z-50">
         <span class="hamburger-line w-5 h-[1.5px] bg-theme-text absolute top-[14px]"></span>
         <span class="hamburger-line w-5 h-[1.5px] bg-theme-text absolute top-[20px]"></span>
         <span class="hamburger-line w-5 h-[1.5px] bg-theme-text absolute top-[26px]"></span>
@@ -201,176 +316,214 @@
 
   <!-- Mobile Overlay Menu -->
   <div id="mobile-menu" class="fixed inset-0 z-30 bg-theme-bg/95 backdrop-blur-2xl flex items-center justify-center">
-    <nav class="flex flex-col space-y-8 text-center px-6">
-      <div class="menu-link-wrapper"><a href="#services"
-          class="menu-link text-4xl font-display font-medium text-theme-text delay-[50ms]"
-          onclick="closeMenu()">Services</a></div>
-      <div class="menu-link-wrapper"><a href="#portfolio"
-          class="menu-link text-4xl font-display font-medium text-theme-text delay-[100ms]"
-          onclick="closeMenu()">Portfolio</a></div>
-      <div class="menu-link-wrapper"><a href="gallery.html"
-          class="menu-link text-4xl font-display font-medium text-theme-text delay-[125ms]"
-          onclick="closeMenu()">Archive</a></div>
-      <div class="menu-link-wrapper"><a href="#studio"
-          class="menu-link text-4xl font-display font-medium text-theme-text delay-[150ms]"
-          onclick="closeMenu()">Studio</a></div>
-      <div class="menu-link-wrapper"><a href="#contact"
-          class="menu-link text-4xl font-display font-medium text-theme-accent delay-[200ms]" onclick="closeMenu()">Book
-          Now</a></div>
+    <nav class="flex flex-col space-y-7 text-center px-6">
+      <div class="menu-link-wrapper"><a href="#services" class="menu-link text-3xl sm:text-4xl font-display font-medium text-theme-text delay-[50ms]" onclick="closeMenu()">Services</a></div>
+      <div class="menu-link-wrapper"><a href="#portfolio" class="menu-link text-3xl sm:text-4xl font-display font-medium text-theme-text delay-[100ms]" onclick="closeMenu()">Portfolio</a></div>
+      <div class="menu-link-wrapper"><a href="gallery.html" class="menu-link text-3xl sm:text-4xl font-display font-medium text-theme-text delay-[125ms]" onclick="closeMenu()">Archive</a></div>
+      <div class="menu-link-wrapper"><a href="#studio" class="menu-link text-3xl sm:text-4xl font-display font-medium text-theme-text delay-[150ms]" onclick="closeMenu()">Studio</a></div>
+      <div class="menu-link-wrapper"><a href="#contact" class="menu-link text-3xl sm:text-4xl font-display font-medium text-[#B8926A] delay-[200ms]" onclick="closeMenu()">Book Now</a></div>
     </nav>
   </div>
 
-  <!-- ══ HERO: EDITORIAL SPLIT ════════════════════════════════ -->
-  <section id="home" class="relative min-h-[100dvh] flex items-center pt-24 pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+  <!-- ══ HERO ════════════════════════════════════════════════════ -->
+  <section id="home" class="hero-section">
 
-        <!-- Typography Block (Left) -->
-        <div class="lg:col-span-6 flex flex-col justify-center z-10 pr-0 lg:pr-8">
-          <div class="gsap-reveal inline-flex items-center gap-2 mb-8">
-            <span class="w-8 h-[1px] bg-theme-text/30"></span>
-          </div>
+    <!-- Left: Typography Panel -->
+    <div class="relative flex flex-col justify-center pt-24 sm:pt-28 lg:pt-24 pb-8 sm:pb-10 lg:pb-12 px-6 sm:px-10 lg:px-12 xl:px-14 bg-theme-bg lg:bg-[#F0EFEB] order-2 lg:order-1">
 
-          <h1
-            class="gsap-reveal text-[13vw] sm:text-[9vw] lg:text-[6.5rem] font-display font-medium leading-[0.9] tracking-[-0.03em] text-theme-text mb-8">
-            “Let your nails<br>do the talking”
-          </h1>
+      <!-- Floating ambient circle -->
+      <div class="absolute top-20 right-0 w-64 h-64 rounded-full bg-[#B8926A]/5 blur-3xl pointer-events-none"></div>
 
-          <p class="gsap-reveal text-lg sm:text-xl text-theme-text/70 leading-relaxed max-w-[45ch] mb-12">
-            A quiet space dedicated to precision nail work, lash extensions, and waxing. No rush. No noise. Just
-            meticulous craft.
-          </p>
-
-          <div class="gsap-reveal flex flex-wrap gap-4 items-center">
-            <a href="#contact"
-              class="group cta-btn inline-flex items-center justify-center bg-theme-accent text-white pl-8 pr-2 py-3 rounded-full hover:bg-theme-accent/90 transition-colors duration-300">
-              <span class="text-[14px] tracking-wide font-medium uppercase mr-6">Book Appointment</span>
-              <div
-                class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[4px] group-hover:-translate-y-[4px] group-hover:scale-110">
-                <i class="ph ph-arrow-up-right text-lg"></i>
-              </div>
-            </a>
-          </div>
+      <div class="relative z-10 max-w-xl mx-auto lg:mx-0">
+        <div id="hero-tag" class="pill-tag mb-5 sm:mb-6 opacity-0">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#B8926A] inline-block"></span>
+          London's Premier Nail Studio
         </div>
 
-        <!-- Visual Block (Right) -->
-        <div class="lg:col-span-6 gsap-reveal">
-          <div
-            class="p-2 lg:p-3 rounded-[2.5rem] bg-theme-surface/30 border border-white/40 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] w-full max-w-[500px] mx-auto lg:ml-auto lg:mr-0 transform -rotate-2">
-            <div
-              class="relative rounded-[calc(2.5rem-0.5rem)] overflow-hidden bezel-core bg-theme-surface aspect-[4/5] group">
-              <img src="images/heloooo.PNG" alt="Precision nail art"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105" />
+        <h1 id="hero-h1" class="font-display font-medium heading-hero text-theme-text mb-4 sm:mb-5 opacity-0">
+          Let your<br>
+          nails do the<br>
+          <span style="color: #B8926A;">talking.</span>
+        </h1>
+
+        <p id="hero-sub" class="text-sm sm:text-base text-theme-text/60 leading-relaxed max-w-[38ch] mb-6 sm:mb-8 opacity-0">
+          A quiet space dedicated to precision nail work, lash extensions, and waxing. No rush. No noise.
+          Just meticulous craft.
+        </p>
+
+        <div id="hero-ctas" class="flex flex-wrap gap-3 sm:gap-4 items-center opacity-0">
+          <a href="#contact" class="group cta-btn inline-flex items-center justify-center bg-[#B8926A] text-white pl-6 sm:pl-7 pr-2 py-2.5 sm:py-3 rounded-full hover:bg-[#9B7850] transition-colors duration-300">
+            <span class="text-xs sm:text-[13px] tracking-wide font-medium uppercase mr-4 sm:mr-5">Book Appointment</span>
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-hover:scale-105">
+              <i class="ph ph-arrow-up-right text-base"></i>
             </div>
-          </div>
+          </a>
+          <a href="#portfolio" class="text-xs sm:text-[13px] tracking-wide font-medium uppercase text-theme-text/60 hover:text-theme-text transition-colors flex items-center gap-2 group py-2">
+            <span>See Work</span>
+            <i class="ph ph-arrow-down text-sm sm:text-base transition-transform group-hover:translate-y-1"></i>
+          </a>
         </div>
 
+        <!-- Stats Row -->
+        <div id="hero-stats" class="flex gap-6 sm:gap-8 mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-theme-text/10 opacity-0">
+          <div>
+            <p class="text-xl sm:text-2xl font-display font-medium text-theme-text">5+</p>
+            <p class="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-theme-text/40 mt-0.5">Years crafting</p>
+          </div>
+          <div class="w-px bg-theme-text/10"></div>
+          <div>
+            <p class="text-xl sm:text-2xl font-display font-medium text-theme-text">2k+</p>
+            <p class="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-theme-text/40 mt-0.5">Happy clients</p>
+          </div>
+          <div class="w-px bg-theme-text/10"></div>
+          <div>
+            <p class="text-xl sm:text-2xl font-display font-medium text-theme-text">100%</p>
+            <p class="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-theme-text/40 mt-0.5">Precision</p>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- Right: Image Panel -->
+    <div class="hero-img-wrap order-1 lg:order-2 h-[42vh] sm:h-[48vh] min-h-[260px] max-h-[400px] lg:h-full lg:max-h-none">
+      <img src="images/1_web.jpg" alt="Model showcasing LS Nails Studio dark red nail extensions" loading="eager" fetchpriority="high" />
+
+      <!-- Floating card on image -->
+      <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-10 stat-card">
+        <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-theme-text/50 mb-0.5">This season's edit</p>
+        <p class="text-xs sm:text-sm font-display font-medium text-theme-text">Deep Wine Stilettos</p>
+        <p class="text-[11px] text-theme-text/50">Gel Extensions &middot; Bespoke Finish</p>
+      </div>
+
+      <!-- Scroll hint (desktop only) -->
+      <div class="hidden lg:flex absolute bottom-6 right-6 z-10 items-center gap-2.5 text-white/70">
+        <span class="text-[9px] uppercase tracking-[0.2em] font-medium">Scroll</span>
+        <div class="w-px h-8 bg-white/30"></div>
+      </div>
+    </div>
+
   </section>
 
-  <!-- ══ SERVICES: ASYMMETRICAL BENTO ════════════════════════════ -->
-  <section id="services" class="py-32 lg:py-40 bg-theme-bg relative z-10 rounded-t-[3rem]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- ══ MARQUEE BAND ════════════════════════════════════════════ -->
+  <div class="bg-theme-surface h-[45px] flex items-center overflow-hidden">
+    <div class="marquee-track">
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Nail Extensions</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Gel Polish</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Nail Art</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Eyelash Extensions</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Waxing</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Pedicure</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Nail Extensions</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Gel Polish</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Nail Art</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Eyelash Extensions</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Waxing</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+      <span class="text-theme-text/45 text-[11px] tracking-[0.25em] uppercase font-medium px-10">Pedicure</span>
+      <span class="text-[#B8926A] text-[11px] px-6">✦</span>
+    </div>
+  </div>
 
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-20">
-        <h2
-          class="gsap-reveal text-5xl md:text-7xl font-display font-medium tracking-tight text-theme-text leading-none">
-          Disciplines
-        </h2>
-        <p class="gsap-reveal text-lg text-theme-text/60 max-w-xs leading-relaxed pb-2">
-          Every treatment is executed with care and professional-grade products.
+  <!-- ══ SERVICES: ASYMMETRICAL BENTO ═══════════════════════════ -->
+  <section id="services" class="section-flow bg-theme-bg relative z-10">
+    <div class="site-container">
+
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8 sm:mb-10">
+        <div>
+          <div class="label-line text-theme-text mb-3 sm:mb-4 gsap-reveal">
+            <span class="line"></span>
+            <span class="label-text">What we offer</span>
+          </div>
+          <h2 class="gsap-reveal heading-section font-display font-medium text-theme-text">
+            Disciplines
+          </h2>
+        </div>
+        <p class="gsap-reveal text-sm sm:text-base text-theme-text/50 max-w-[32ch] leading-relaxed pb-1">
+          Every treatment executed with care and professional-grade products.
         </p>
       </div>
 
       <!-- Bento Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-4 auto-rows-min">
 
-        <!-- Large Card -->
-        <div
-          class="md:col-span-8 p-1.5 rounded-[2rem] bg-theme-surface/40 border border-white/50 shadow-[0_10px_30px_rgba(0,0,0,0.03)] gsap-reveal">
-          <div
-            class="h-full rounded-[calc(2rem-0.375rem)] bg-[#F8F7F4] bezel-core p-8 md:p-12 flex flex-col justify-between min-h-[320px]">
+        <!-- Large Card: Nail Extensions -->
+        <div class="md:col-span-7 p-1 rounded-[1.5rem] bg-theme-surface/40 border border-white/50 shadow-sm gsap-reveal">
+          <div class="h-full rounded-[calc(1.5rem-0.25rem)] bg-[#FBF8F3] bezel-core p-5 sm:p-6 lg:p-7 flex flex-col justify-between min-h-[205px]">
             <div class="flex justify-between items-start">
-              <i class="ph ph-sparkle text-3xl text-theme-accent"></i>
-              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/40">01</span>
+              <i class="ph ph-sparkle text-2xl sm:text-3xl text-[#B8926A]"></i>
+              <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-theme-text/30">01</span>
             </div>
-            <div class="mt-16">
-              <h3 class="text-3xl font-display font-medium mb-3 text-theme-text">Nail Extensions & Art</h3>
-              <p class="text-theme-text/60 leading-relaxed max-w-[40ch] mb-8">Acrylic and gel extensions built for
-                longevity. Custom hand-painted designs from subtle minimalism to detailed 3D embellishments.</p>
-              <a href="#contact"
-                class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-theme-accent group">
-                <span
-                  class="border-b border-theme-accent/30 pb-0.5 group-hover:border-theme-accent transition-colors">Book
-                  Session</span>
+            <div class="mt-4 sm:mt-5">
+              <h3 class="text-2xl sm:text-3xl font-display font-medium mb-2 sm:mb-3 text-theme-text">Nail Extensions & Art</h3>
+              <p class="text-theme-text/60 leading-relaxed max-w-[38ch] mb-4 sm:mb-5 text-xs sm:text-sm">Acrylic and gel extensions built for longevity. Custom hand-painted designs from subtle minimalism to detailed 3D embellishments.</p>
+              <a href="#contact" class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-wide text-[#B8926A] group">
+                <span class="border-b border-[#B8926A]/30 pb-0.5 group-hover:border-[#B8926A] transition-colors">Book Session</span>
                 <i class="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Small Card -->
-        <div
-          class="md:col-span-4 p-1.5 rounded-[2rem] bg-theme-surface/40 border border-white/50 shadow-[0_10px_30px_rgba(0,0,0,0.03)] gsap-reveal">
-          <div
-            class="h-full rounded-[calc(2rem-0.375rem)] bg-theme-surface bezel-core p-8 md:p-10 flex flex-col justify-between min-h-[320px] relative overflow-hidden group">
+        <!-- Small Card: Pedicure -->
+        <div class="md:col-span-5 p-1 rounded-[1.5rem] bg-theme-surface/40 border border-white/50 shadow-sm gsap-reveal">
+          <div class="h-full rounded-[calc(1.5rem-0.25rem)] bg-theme-surface bezel-core p-5 sm:p-6 flex flex-col justify-between min-h-[205px] relative overflow-hidden group">
             <div class="relative z-10 flex justify-between items-start">
-              <i class="ph ph-flower-lotus text-3xl text-theme-text"></i>
-              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/40">02</span>
+              <i class="ph ph-flower-lotus text-2xl sm:text-3xl text-theme-text"></i>
+              <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-theme-text/30">02</span>
             </div>
-            <div class="relative z-10 mt-16">
-              <h3 class="text-2xl font-display font-medium mb-3 text-theme-text">Pedicure</h3>
-              <p class="text-theme-text/70 leading-relaxed text-sm mb-8">A thorough spa pedicure — unhurried and deeply
-                relaxing.</p>
-              <a href="#contact"
-                class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-theme-text group-hover:text-theme-text/70">
+            <div class="relative z-10 mt-4 sm:mt-5">
+              <h3 class="text-lg sm:text-xl font-display font-medium mb-1.5 sm:mb-2 text-theme-text">Pedicure</h3>
+              <p class="text-theme-text/70 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-5">A thorough spa pedicure — unhurried and deeply relaxing.</p>
+              <a href="#contact" class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-wide text-theme-text">
                 <span class="border-b border-theme-text/30 pb-0.5">Book</span>
               </a>
             </div>
-            <!-- Subtle Image Hint Background -->
-            <img src="images/IMG-20260913-WA0037.jpg" alt=""
-              class="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110 grayscale" />
+            <img src="images/IMG-20260913-WA0037.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110 grayscale" />
           </div>
         </div>
 
-        <!-- Small Card -->
-        <div
-          class="md:col-span-5 p-1.5 rounded-[2rem] bg-theme-surface/40 border border-white/50 shadow-[0_10px_30px_rgba(0,0,0,0.03)] gsap-reveal">
-          <div
-            class="h-full rounded-[calc(2rem-0.375rem)] bg-[#F8F7F4] bezel-core p-8 md:p-10 flex flex-col justify-between min-h-[300px]">
+        <!-- Small Card: Eyelash Extensions -->
+        <div class="md:col-span-5 p-1 rounded-[1.5rem] bg-theme-surface/40 border border-white/50 shadow-sm gsap-reveal">
+          <div class="h-full rounded-[calc(1.5rem-0.25rem)] bg-[#FBF8F3] bezel-core p-5 sm:p-6 flex flex-col justify-between min-h-[190px]">
             <div class="flex justify-between items-start">
-              <i class="ph ph-eye text-3xl text-theme-text"></i>
-              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/40">03</span>
+              <i class="ph ph-eye text-2xl sm:text-3xl text-theme-text"></i>
+              <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-theme-text/30">03</span>
             </div>
-            <div class="mt-12">
-              <h3 class="text-2xl font-display font-medium mb-3 text-theme-text">Eyelash Extensions</h3>
-              <p class="text-theme-text/60 leading-relaxed text-sm mb-6">Classic, hybrid and volume sets applied strand
-                by strand, designed exclusively for your eye shape.</p>
-              <a href="#contact"
-                class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-theme-text group">
+            <div class="mt-4 sm:mt-5">
+              <h3 class="text-lg sm:text-xl font-display font-medium mb-1.5 sm:mb-2 text-theme-text">Eyelash Extensions</h3>
+              <p class="text-theme-text/60 leading-relaxed text-xs sm:text-sm mb-3 sm:mb-4">Classic, hybrid and volume sets applied strand by strand, designed exclusively for your eye shape.</p>
+              <a href="#contact" class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-wide text-theme-text group">
                 <span class="border-b border-theme-text/30 pb-0.5 group-hover:border-theme-text">Book</span>
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Medium Card -->
-        <div
-          class="md:col-span-7 p-1.5 rounded-[2rem] bg-theme-surface/40 border border-white/50 shadow-[0_10px_30px_rgba(0,0,0,0.03)] gsap-reveal">
-          <div
-            class="h-full rounded-[calc(2rem-0.375rem)] bg-theme-text bezel-core p-8 md:p-12 flex flex-col justify-between min-h-[300px] text-theme-bg">
+        <!-- Medium Dark Card: Waxing -->
+        <div class="md:col-span-7 p-1 rounded-[1.5rem] bg-theme-surface/40 border border-white/50 shadow-sm gsap-reveal">
+          <div class="h-full rounded-[calc(1.5rem-0.25rem)] bg-[#2C1F10] bezel-core p-5 sm:p-6 lg:p-7 flex flex-col justify-between min-h-[190px] text-white relative overflow-hidden group">
             <div class="flex justify-between items-start">
-              <i class="ph ph-scissors text-3xl text-theme-bg/80"></i>
-              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-bg/40">04</span>
+              <i class="ph ph-scissors text-2xl sm:text-3xl text-white/70"></i>
+              <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-white/30">04</span>
             </div>
-            <div class="mt-12">
-              <h3 class="text-3xl font-display font-medium mb-3 text-theme-bg">Waxing</h3>
-              <p class="text-theme-bg/70 leading-relaxed max-w-[40ch] mb-8">Precise, gentle hair removal using premium
-                soft and hard wax. Eyebrow shaping through to full body.</p>
-              <a href="#contact"
-                class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-theme-bg/90 group">
-                <span class="border-b border-theme-bg/30 pb-0.5 group-hover:border-theme-bg">Book</span>
+            <!-- Subtle caramel glow blob -->
+            <div class="absolute bottom-0 right-0 w-56 h-56 rounded-full bg-[#B8926A]/20 blur-3xl pointer-events-none translate-x-12 translate-y-12 group-hover:scale-125 transition-transform duration-1000"></div>
+            <div class="mt-4 sm:mt-5 relative z-10">
+              <h3 class="text-xl sm:text-2xl font-display font-medium mb-1.5 sm:mb-2">Waxing</h3>
+              <p class="text-white/60 leading-relaxed max-w-[40ch] mb-4 sm:mb-5 text-xs sm:text-sm">Precise, gentle hair removal using premium soft and hard wax. Eyebrow shaping through to full body.</p>
+              <a href="#contact" class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-wide text-white/70 hover:text-white group">
+                <span class="border-b border-white/20 pb-0.5 group-hover:border-white transition-colors">Book</span>
+                <i class="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
               </a>
             </div>
           </div>
@@ -380,240 +533,248 @@
     </div>
   </section>
 
-  <!-- ══ GALLERY: HORIZONTAL PAN ══════════════════════════════ -->
-  <section id="portfolio" class="bg-[#111111] text-theme-bg relative overflow-hidden py-32 rounded-[3rem]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
-      <div class="gsap-reveal inline-flex items-center gap-2 mb-6">
-        <span class="w-8 h-[1px] bg-theme-bg/30"></span>
-        <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-theme-bg/60">Portfolio</span>
+  <!-- ══ PORTFOLIO: HORIZONTAL GALLERY ══════════════════════════ -->
+  <section id="portfolio" class="bg-[#2A1C0C] text-white relative overflow-hidden py-10 sm:py-12 lg:py-14 rounded-[2rem] mx-2 sm:mx-4 lg:mx-6 my-2 sm:my-4">
+    <div class="site-container mb-6 sm:mb-8 relative z-10 w-full shrink-0">
+      <div class="label-line text-white gsap-reveal mb-3 sm:mb-4">
+        <span class="line"></span>
+        <span class="label-text">Portfolio</span>
       </div>
-      <h2 class="gsap-reveal text-5xl md:text-7xl font-display font-medium tracking-tight leading-none mb-4">
-        Selected Work
-      </h2>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <h2 class="gsap-reveal heading-section font-display font-medium text-white">
+          Selected<br class="hidden sm:inline"> Work
+        </h2>
+        <a href="gallery.html" class="gsap-reveal group inline-flex items-center gap-2.5 text-white/40 hover:text-white transition-colors text-xs tracking-wide uppercase font-medium self-start sm:self-end">
+          <span>View all</span>
+          <i class="ph ph-arrow-up-right text-base group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+        </a>
+      </div>
     </div>
 
-    <!-- The pinning container -->
-    <div id="gallery-pin-wrapper" class="relative">
-      <div
-        class="h-[75dvh] lg:h-screen w-full flex items-center max-lg:overflow-x-auto max-lg:snap-x max-lg:snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] lg:overflow-hidden">
-        <!-- The sliding track -->
-        <div id="gallery-track" class="flex gap-8 px-4 sm:px-8 md:px-16 items-center w-max [&>div]:max-lg:snap-center"
+    <!-- Pin wrapper -->
+    <div id="gallery-pin-wrapper" class="relative w-full shrink-0">
+      <div class="h-[55vh] sm:h-[55vh] lg:h-[60vh] max-h-[500px] w-full flex items-center max-lg:overflow-x-auto max-lg:snap-x max-lg:snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] lg:overflow-hidden">
+        <div id="gallery-track" class="flex gap-4 sm:gap-5 px-4 sm:px-8 md:px-12 items-center w-max [&>div]:max-lg:snap-center"
           style="will-change: transform; backface-visibility: hidden; transform: translateZ(0);">
 
-          <div
-            class="w-[75vw] sm:w-[50vw] md:w-[35vw] shrink-0 p-1.5 rounded-[2rem] bg-white/5 border border-white/10 shadow-2xl">
-            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden aspect-[3/4] bg-[#1a1a1a]">
-              <img src="images/IMG-20260913-WA0036.jpg" alt="Floral French nails" loading="eager" decoding="async"
-                class="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div
-            class="w-[75vw] sm:w-[50vw] md:w-[30vw] shrink-0 p-1.5 rounded-[2rem] bg-white/5 border border-white/10 shadow-2xl mt-16">
-            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden aspect-square bg-[#1a1a1a]">
-              <img src="images/IMG_4207.JPG" alt="Tortoiseshell and blue nail art" loading="eager" decoding="async"
-                class="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div
-            class="w-[75vw] sm:w-[50vw] md:w-[35vw] shrink-0 p-1.5 rounded-[2rem] bg-white/5 border border-white/10 shadow-2xl -mt-8">
-            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden aspect-[4/5] bg-[#1a1a1a]">
-              <img src="images/IMG-20260913-WA0040.jpg" alt="Nail art" loading="eager" decoding="async"
-                class="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div
-            class="w-[75vw] sm:w-[50vw] md:w-[30vw] shrink-0 p-1.5 rounded-[2rem] bg-white/5 border border-white/10 shadow-2xl mt-8">
-            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden aspect-square bg-[#1a1a1a]">
-              <img src="images/IMG-20260913-WA0038.jpg" alt="Nail art" loading="eager" decoding="async"
-                class="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div
-            class="w-[75vw] sm:w-[50vw] md:w-[35vw] shrink-0 p-1.5 rounded-[2rem] bg-white/5 border border-white/10 shadow-2xl mt-4">
-            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden aspect-[3/4] bg-[#1a1a1a]">
-              <img src="images/IMG-20260913-WA0039.jpg" alt="Nail art" loading="eager" decoding="async"
-                class="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div
-            class="w-[75vw] sm:w-[50vw] md:w-[30vw] shrink-0 p-1.5 rounded-[2rem] bg-white/5 border border-white/10 shadow-2xl -mt-4">
-            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden aspect-square bg-[#1a1a1a]">
-              <img src="images/IMG_1859.PNG" alt="Nail art" loading="eager" decoding="async"
-                class="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div
-            class="w-[75vw] sm:w-[50vw] md:w-[35vw] shrink-0 p-1.5 rounded-[2rem] bg-white/5 border border-white/10 shadow-2xl mt-12">
-            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden aspect-[4/5] bg-[#1a1a1a]">
-              <img src="images/IMG_9284.JPG" alt="Nail art" loading="eager" decoding="async"
-                class="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div class="w-[40vw] sm:w-[30vw] md:w-[20vw] shrink-0 flex items-center justify-center pl-8">
-            <a href="gallery.html"
-              class="group cta-btn inline-flex flex-col items-center justify-center gap-6 text-theme-bg/60 hover:text-white transition-colors duration-300">
-              <div
-                class="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-white/10 group-hover:scale-110">
-                <i class="ph ph-arrow-right text-3xl"></i>
+          <!-- Image 1: 3.jpeg hero featured card (large) -->
+          <div class="w-[68vw] sm:w-[48vw] md:w-[35vw] lg:w-[28vw] max-w-[340px] shrink-0 p-1 rounded-[1.25rem] bg-white/5 border border-white/10 shadow-lg">
+            <div class="relative rounded-[calc(1.25rem-0.25rem)] overflow-hidden aspect-[3/4] bg-[#3A2A18]">
+              <img src="images/3.jpeg" alt="Deep wine stiletto nails with Chanel compact" loading="eager" decoding="async" class="w-full h-full object-cover" />
+              <div class="absolute bottom-3 left-3 right-3">
+                <span class="inline-block bg-white/10 backdrop-blur-md border border-white/10 text-white/80 text-[9px] tracking-[0.18em] uppercase font-medium px-2.5 py-1 rounded-full">Featured</span>
               </div>
-              <span class="text-[12px] tracking-[0.2em] font-medium uppercase text-center leading-relaxed">View
-                All<br>Images</span>
+            </div>
+          </div>
+
+          <!-- Image 2: IMG-20260913-WA0036 -->
+          <div class="w-[56vw] sm:w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[275px] shrink-0 p-1 rounded-[1.25rem] bg-white/5 border border-white/10 shadow-lg mt-5">
+            <div class="relative rounded-[calc(1.25rem-0.25rem)] overflow-hidden aspect-square bg-[#2A1F14]">
+              <img src="images/IMG-20260913-WA0036.jpg" alt="Floral French nails" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          <!-- Image 3 -->
+          <div class="w-[60vw] sm:w-[42vw] md:w-[30vw] lg:w-[24vw] max-w-[300px] shrink-0 p-1 rounded-[1.25rem] bg-white/5 border border-white/10 shadow-lg -mt-3">
+            <div class="relative rounded-[calc(1.25rem-0.25rem)] overflow-hidden aspect-[4/5] bg-[#2A1F14]">
+              <img src="images/IMG-20260913-WA0040.jpg" alt="Nail art" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          <!-- Image 4 -->
+          <div class="w-[54vw] sm:w-[38vw] md:w-[26vw] lg:w-[20vw] max-w-[260px] shrink-0 p-1 rounded-[1.25rem] bg-white/5 border border-white/10 shadow-lg mt-4">
+            <div class="relative rounded-[calc(1.25rem-0.25rem)] overflow-hidden aspect-square bg-[#2A1F14]">
+              <img src="images/IMG-20260913-WA0038.jpg" alt="Nail art" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          <!-- Image 5 -->
+          <div class="w-[60vw] sm:w-[42vw] md:w-[30vw] lg:w-[24vw] max-w-[300px] shrink-0 p-1 rounded-[1.25rem] bg-white/5 border border-white/10 shadow-lg mt-2">
+            <div class="relative rounded-[calc(1.25rem-0.25rem)] overflow-hidden aspect-[3/4] bg-[#3A2A18]">
+              <img src="images/IMG-20260913-WA0039.jpg" alt="Nail art" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          <!-- Image 6 -->
+          <div class="w-[54vw] sm:w-[38vw] md:w-[26vw] lg:w-[20vw] max-w-[260px] shrink-0 p-1 rounded-[1.25rem] bg-white/5 border border-white/10 shadow-lg -mt-3">
+            <div class="relative rounded-[calc(1.25rem-0.25rem)] overflow-hidden aspect-square bg-[#2A1F14]">
+              <img src="images/IMG_9284.JPG" alt="Nail art" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          <!-- Image 7: 2.jpeg editorial close-up -->
+          <div class="w-[62vw] sm:w-[44vw] md:w-[32vw] lg:w-[26vw] max-w-[310px] shrink-0 p-1 rounded-[1.25rem] bg-white/5 border border-white/10 shadow-lg mt-4">
+            <div class="relative rounded-[calc(1.25rem-0.25rem)] overflow-hidden aspect-[3/4] bg-[#3A2A18]">
+              <img src="images/2.jpeg" alt="Editorial close-up of dark red nail extensions" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          <!-- View All CTA -->
+          <div class="w-[24vw] sm:w-[20vw] md:w-[15vw] lg:w-[12vw] max-w-[160px] shrink-0 flex items-center justify-center pl-3">
+            <a href="gallery.html" class="group cta-btn inline-flex flex-col items-center justify-center gap-2.5 text-white/40 hover:text-white transition-colors duration-300">
+              <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/20 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-white/10 group-hover:scale-110 group-hover:border-white/40">
+                <i class="ph ph-arrow-right text-lg sm:text-xl"></i>
+              </div>
+              <span class="text-[9px] tracking-[0.2em] font-medium uppercase text-center leading-relaxed">View<br>All</span>
             </a>
           </div>
 
-          <div class="w-[10vw] shrink-0"></div> <!-- Buffer -->
+          <div class="w-[4vw] shrink-0"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ ABOUT THE STUDIO ════════════════════════════════════ -->
-  <section id="studio" class="py-32 lg:py-48 bg-theme-bg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+  <!-- ══ STUDIO / ABOUT ══════════════════════════════════════════ -->
+  <section id="studio" class="section-flow bg-theme-bg">
+    <div class="site-container">
 
-        <div
-          class="gsap-reveal p-2 rounded-[2.5rem] bg-theme-surface/40 border border-white/50 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] w-full max-w-[450px] mx-auto transform rotate-1 order-2 lg:order-1">
-          <div class="relative rounded-[calc(2.5rem-0.5rem)] overflow-hidden bezel-core bg-theme-surface aspect-[3/4]">
-            <img src="images/new.jpg" alt="Nail work at LS Nails Studio" loading="lazy"
-              class="w-full h-full object-cover grayscale-[20%]" />
+      <!-- Header row -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 sm:mb-10 lg:mb-12">
+        <div>
+          <div class="label-line text-theme-text mb-3 sm:mb-4 gsap-reveal">
+            <span class="line"></span>
+            <span class="label-text">The Studio</span>
+          </div>
+          <h2 class="gsap-reveal heading-section font-display font-medium text-theme-text leading-none">
+            Born from craft.<br>Built on trust.
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+
+        <!-- Image: 2.jpeg editorial portrait -->
+        <div class="lg:col-span-5 gsap-reveal relative">
+          <div class="p-1.5 rounded-[2rem] bg-theme-surface/50 border border-white/60 shadow-md w-full max-w-[360px] mx-auto lg:mx-0 transform rotate-1">
+            <div class="relative rounded-[calc(2rem-0.375rem)] overflow-hidden bezel-core bg-theme-surface aspect-[3/4]">
+              <img src="images/2.jpeg" alt="LS Nails Studio — editorial close-up portrait" loading="lazy" class="w-full h-full object-cover" />
+            </div>
+          </div>
+          <!-- Floating accent card -->
+          <div class="absolute -bottom-3 -right-3 lg:right-4 stat-card hidden sm:block py-2 px-3.5">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-theme-text/40 mb-0.5">Established</p>
+            <p class="text-lg font-display font-medium text-theme-text">2019</p>
           </div>
         </div>
 
-        <div class="flex flex-col order-1 lg:order-2">
-          <div class="gsap-reveal inline-flex items-center gap-2 mb-8">
-            <span class="w-8 h-[1px] bg-theme-text/30"></span>
-            <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-theme-text/60">The Studio</span>
-          </div>
-
-          <h2
-            class="gsap-reveal text-4xl md:text-6xl font-display font-medium text-theme-text tracking-tight leading-[1.05] mb-10">
-            Born from craft.<br />Built on trust.
-          </h2>
-
-          <div class="gsap-reveal space-y-6 text-lg text-theme-text/70 leading-relaxed max-w-[45ch] mb-16">
-            <p>LS Nails was built around a single idea — that a nail appointment should feel like a proper treat, not a
-              conveyor belt. We keep the studio small, the bookings intentional, and the work precise.</p>
+        <!-- Text content -->
+        <div class="lg:col-span-7 flex flex-col">
+          <div class="gsap-reveal space-y-4 text-base sm:text-lg text-theme-text/65 leading-relaxed max-w-[45ch] mb-6 sm:mb-8">
+            <p>LS Nails was built around a single idea — that a nail appointment should feel like a proper treat, not a conveyor belt. We keep the studio small, the bookings intentional, and the work precise.</p>
           </div>
 
           <div class="border-t border-theme-text/10">
-
-            <div class="py-8 border-b border-theme-text/10 flex gap-8 gsap-reveal">
-              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/30 mt-1.5">01</span>
+            <div class="py-4 sm:py-5 border-b border-theme-text/10 flex gap-4 sm:gap-6 gsap-reveal">
+              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/25 mt-1">01</span>
               <div>
-                <h4 class="text-xl font-display font-medium text-theme-text mb-2">Professional Grade</h4>
-                <p class="text-sm text-theme-text/60 leading-relaxed">Cruelty-free, skin-tested, and safe for long-term
-                  use. We don't cut costs where it matters.</p>
+                <h4 class="text-lg sm:text-xl font-display font-medium text-theme-text mb-1">Professional Grade</h4>
+                <p class="text-xs sm:text-sm text-theme-text/55 leading-relaxed">Cruelty-free, skin-tested, and safe for long-term use. We don't cut costs where it matters.</p>
               </div>
             </div>
 
-            <div class="py-8 border-b border-theme-text/10 flex gap-8 gsap-reveal">
-              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/30 mt-1.5">02</span>
+            <div class="py-4 sm:py-5 border-b border-theme-text/10 flex gap-4 sm:gap-6 gsap-reveal">
+              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/25 mt-1">02</span>
               <div>
-                <h4 class="text-xl font-display font-medium text-theme-text mb-2">Full Sterilisation</h4>
-                <p class="text-sm text-theme-text/60 leading-relaxed">Every tool sanitised, every surface cleaned. Your
-                  health is the baseline.</p>
+                <h4 class="text-lg sm:text-xl font-display font-medium text-theme-text mb-1">Full Sterilisation</h4>
+                <p class="text-xs sm:text-sm text-theme-text/55 leading-relaxed">Every tool sanitised, every surface cleaned. Your health is the baseline.</p>
               </div>
             </div>
 
+            <div class="py-4 sm:py-5 flex gap-4 sm:gap-6 gsap-reveal">
+              <span class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/25 mt-1">03</span>
+              <div>
+                <h4 class="text-lg sm:text-xl font-display font-medium text-theme-text mb-1">Small, Intentional Bookings</h4>
+                <p class="text-xs sm:text-sm text-theme-text/55 leading-relaxed">We don't overbook. Every client gets the time, attention, and care they deserve.</p>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══ CONTACT ════════════════════════════════════════════ -->
-  <section id="contact" class="py-32 lg:py-48 bg-theme-surface">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
+  <!-- ══ CONTACT ═════════════════════════════════════════════════ -->
+  <section id="contact" class="section-flow bg-theme-surface">
+    <div class="site-container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-        <!-- Mobile Heading (visible only on mobile, order-1) -->
+        <!-- Mobile Heading -->
         <div class="col-span-1 flex flex-col order-1 lg:hidden mb-2">
-          <div class="gsap-reveal inline-flex items-center gap-2 mb-6">
-            <span class="w-8 h-[1px] bg-theme-text/30"></span>
-            <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-theme-text/60">Get in touch</span>
+          <div class="label-line text-theme-text mb-3 gsap-reveal">
+            <span class="line"></span>
+            <span class="label-text">Get in touch</span>
           </div>
-          <h2 class="gsap-reveal text-5xl font-display font-medium text-theme-text tracking-tight leading-[0.95]">
+          <h2 class="gsap-reveal heading-section font-display font-medium text-theme-text">
             Secure your<br>time.
           </h2>
         </div>
 
+        <!-- Left: info -->
         <div class="lg:col-span-5 flex flex-col order-3 lg:order-1">
-          <!-- Desktop Heading (visible only on lg) -->
-          <div class="hidden lg:flex flex-col">
-            <div class="gsap-reveal inline-flex items-center gap-2 mb-8">
-              <span class="w-8 h-[1px] bg-theme-text/30"></span>
-              <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-theme-text/60">Get in touch</span>
+          <!-- Desktop Heading -->
+          <div class="hidden lg:flex flex-col mb-6 sm:mb-8">
+            <div class="label-line text-theme-text mb-4 gsap-reveal">
+              <span class="line"></span>
+              <span class="label-text">Get in touch</span>
             </div>
-            <h2
-              class="gsap-reveal text-5xl md:text-7xl font-display font-medium text-theme-text tracking-tight leading-[0.95] mb-16">
+            <h2 class="gsap-reveal heading-section font-display font-medium text-theme-text">
               Secure your<br>time.
             </h2>
           </div>
 
-          <div class="space-y-12">
+          <div class="space-y-6 sm:space-y-7">
             <div class="gsap-reveal">
-              <p class="text-xs font-medium uppercase tracking-[0.2em] text-theme-text/40 mb-2">Location</p>
+              <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-theme-text/40 mb-1.5">Location</p>
               <a href="https://maps.app.goo.gl/BYhdrHYuN5BCNXjYA" target="_blank" rel="noopener noreferrer"
-                class="group flex items-start gap-2 text-theme-text hover:text-theme-accent transition-colors">
-                <i class="ph ph-map-pin text-xl mt-0.5"></i>
-                <p class="text-base leading-relaxed">danata gedara<br /></p>
+                class="group flex items-start gap-2 text-theme-text hover:text-[#B8926A] transition-colors">
+                <i class="ph ph-map-pin text-lg mt-0.5"></i>
+                <p class="text-sm sm:text-base leading-relaxed">danata gedara</p>
               </a>
             </div>
 
-            <div class="gsap-reveal flex flex-col gap-2">
-              <a href="mailto:hello@lsnails.co.uk"
-                class="text-theme-text text-lg hover:text-theme-accent transition-colors">hello@lsnails.co.uk</a>
-              <a href="tel:+94712081576" class="text-theme-text text-lg hover:text-theme-accent transition-colors">+94
-                71 208 1576</a>
+            <div class="gsap-reveal flex flex-col gap-1.5">
+              <a href="mailto:hello@lsnails.co.uk" class="text-theme-text text-sm sm:text-base hover:text-[#B8926A] transition-colors">hello@lsnails.co.uk</a>
+              <a href="tel:+94712081576" class="text-theme-text text-sm sm:text-base hover:text-[#B8926A] transition-colors">+94 71 208 1576</a>
             </div>
 
-            <div class="gsap-reveal pt-4 flex flex-col gap-3">
-              <a href="https://www.instagram.com/__ls_nails__?stkn=dGQzdzhjNDBndXk1" target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-3 text-theme-text/60 hover:text-theme-accent transition-colors">
-                <i class="ph ph-instagram-logo text-2xl"></i>
-                <span class="text-sm font-medium tracking-wide">Instagram</span>
+            <div class="gsap-reveal pt-2 flex flex-col gap-2.5">
+              <a href="https://www.instagram.com/__ls_nails__?stkn=dGQzdzhjNDBndXk1" target="_blank" rel="noopener noreferrer"
+                class="flex items-center gap-3 text-theme-text/50 hover:text-[#B8926A] transition-colors">
+                <i class="ph ph-instagram-logo text-xl"></i>
+                <span class="text-xs sm:text-sm font-medium tracking-wide">Instagram</span>
               </a>
-              <a href="https://www.facebook.com/profile.php?id=100091059944803&mibextid=ZbWKwL" target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-3 text-theme-text/60 hover:text-theme-accent transition-colors">
-                <i class="ph ph-facebook-logo text-2xl"></i>
-                <span class="text-sm font-medium tracking-wide">Facebook</span>
+              <a href="https://www.facebook.com/profile.php?id=100091059944803&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer"
+                class="flex items-center gap-3 text-theme-text/50 hover:text-[#B8926A] transition-colors">
+                <i class="ph ph-facebook-logo text-xl"></i>
+                <span class="text-xs sm:text-sm font-medium tracking-wide">Facebook</span>
               </a>
-              <a href="https://www.tiktok.com/@ls_nails__?_r=1&_t=ZS-99wutADDfIi" target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-3 text-theme-text/60 hover:text-theme-accent transition-colors">
-                <i class="ph ph-tiktok-logo text-2xl"></i>
-                <span class="text-sm font-medium tracking-wide">TikTok</span>
+              <a href="https://www.tiktok.com/@ls_nails__?_r=1&_t=ZS-99wutADDfIi" target="_blank" rel="noopener noreferrer"
+                class="flex items-center gap-3 text-theme-text/50 hover:text-[#B8926A] transition-colors">
+                <i class="ph ph-tiktok-logo text-xl"></i>
+                <span class="text-xs sm:text-sm font-medium tracking-wide">TikTok</span>
               </a>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-6 lg:col-start-7 gsap-reveal order-2 lg:order-2">
-          <div
-            class="p-1.5 rounded-[2rem] bg-theme-bg/40 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]">
-            <div class="rounded-[calc(2rem-0.375rem)] bg-theme-bg bezel-core p-8 md:p-12">
-              <form id="booking-form" novalidate class="space-y-6">
+        <!-- Right: Booking Form -->
+        <div class="lg:col-span-7 gsap-reveal order-2 lg:order-2">
+          <div class="p-1 sm:p-1.5 rounded-[1.75rem] bg-white/50 border border-white/80 shadow-sm">
+            <div class="rounded-[calc(1.75rem-0.25rem)] bg-white bezel-core p-5 sm:p-7 lg:p-8">
+              <form id="booking-form" novalidate class="space-y-4">
 
-                <div class="space-y-2">
-                  <label class="text-xs font-medium text-theme-text/70 ml-1">Full Name</label>
+                <div class="space-y-1.5">
+                  <label for="booking-name" class="text-xs font-medium text-theme-text/60 ml-1">Full Name</label>
                   <input type="text" id="booking-name" required
-                    class="w-full px-5 py-3 text-base text-theme-text bg-theme-surface/50 border border-transparent rounded-[1rem] focus:bg-white focus:border-theme-accent focus:ring-1 focus:ring-theme-accent outline-none transition-all" />
+                    class="w-full px-4 py-2.5 sm:py-3 text-sm sm:text-base text-theme-text bg-theme-bg/60 border border-transparent rounded-xl focus:bg-white focus:border-[#B8926A] focus:ring-1 focus:ring-[#B8926A]/30 outline-none transition-all" />
                 </div>
 
-                <div class="space-y-2">
-                  <label class="text-xs font-medium text-theme-text/70 ml-1">Service Requested</label>
+                <div class="space-y-1.5">
+                  <label for="booking-service" class="text-xs font-medium text-theme-text/60 ml-1">Service Requested</label>
                   <select required id="booking-service"
-                    class="w-full px-5 py-3 text-base text-theme-text bg-theme-surface/50 border border-transparent rounded-[1rem] focus:bg-white focus:border-theme-accent focus:ring-1 focus:ring-theme-accent outline-none transition-all appearance-none cursor-pointer">
+                    class="w-full px-4 py-2.5 sm:py-3 text-sm sm:text-base text-theme-text bg-theme-bg/60 border border-transparent rounded-xl focus:bg-white focus:border-[#B8926A] focus:ring-1 focus:ring-[#B8926A]/30 outline-none transition-all appearance-none cursor-pointer">
                     <option value="" disabled selected>Select a discipline</option>
                     <option>Nail Extensions</option>
                     <option>Nail Art</option>
@@ -623,19 +784,18 @@
                   </select>
                 </div>
 
-                <div class="space-y-2">
-                  <label class="text-xs font-medium text-theme-text/70 ml-1">Notes</label>
+                <div class="space-y-1.5">
+                  <label for="booking-notes" class="text-xs font-medium text-theme-text/60 ml-1">Notes</label>
                   <textarea rows="3" id="booking-notes"
-                    class="w-full px-5 py-3 text-base text-theme-text bg-theme-surface/50 border border-transparent rounded-[1rem] focus:bg-white focus:border-theme-accent focus:ring-1 focus:ring-theme-accent outline-none transition-all resize-none"></textarea>
+                    class="w-full px-4 py-2.5 sm:py-3 text-sm sm:text-base text-theme-text bg-theme-bg/60 border border-transparent rounded-xl focus:bg-white focus:border-[#B8926A] focus:ring-1 focus:ring-[#B8926A]/30 outline-none transition-all resize-none"></textarea>
                 </div>
 
-                <div class="pt-4">
+                <div class="pt-2">
                   <button type="submit"
-                    class="group cta-btn w-full flex items-center justify-center bg-theme-text text-theme-bg px-2 py-3 rounded-full hover:bg-theme-text/90 transition-colors duration-300">
-                    <span class="text-[14px] tracking-wide font-medium uppercase mr-4">Send Request</span>
-                    <div
-                      class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:scale-105">
-                      <i class="ph ph-arrow-right text-sm"></i>
+                    class="group cta-btn w-full flex items-center justify-center bg-[#B8926A] text-white px-2 py-3 rounded-full hover:bg-[#9B7850] transition-colors duration-300">
+                    <span class="text-xs sm:text-[13px] tracking-wide font-medium uppercase mr-3 sm:mr-4">Send Request</span>
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:scale-105">
+                      <i class="ph ph-arrow-right text-xs sm:text-sm"></i>
                     </div>
                   </button>
                 </div>
@@ -648,27 +808,25 @@
     </div>
   </section>
 
-
-  <!-- ══ FLOATING WHATSAPP BUTTON ══════════════════════════════ -->
+  <!-- ══ FLOATING WHATSAPP ═══════════════════════════════════════ -->
   <a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer"
     class="fixed bottom-6 right-6 z-50 flex items-center gap-3 group" aria-label="Chat on WhatsApp">
-    <span
-      class="bg-white text-[#111] text-sm font-medium px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none hidden sm:block">
+    <span class="bg-white text-[#1A1208] text-sm font-medium px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none hidden sm:block">
       Chat now
     </span>
-    <div
-      class="w-14 h-14 bg-[#111] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 relative border border-white/20">
+    <div class="w-14 h-14 bg-[#1A1208] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 relative border border-white/10">
       <i class="ph ph-whatsapp-logo text-3xl"></i>
       <span class="absolute top-0 right-0 flex h-3.5 w-3.5">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 border-2 border-[#111]"></span>
+        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 border-2 border-[#1A1208]"></span>
       </span>
     </div>
   </a>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Mobile Menu Logic
+
+      // ── 1. Mobile Menu ──────────────────────────────────────────
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobile-menu');
       const lines = hamburger.querySelectorAll('.hamburger-line');
@@ -676,6 +834,8 @@
 
       function toggleMenu() {
         isMenuOpen = !isMenuOpen;
+        hamburger.setAttribute('aria-expanded', String(isMenuOpen));
+        hamburger.setAttribute('aria-label', isMenuOpen ? 'Close navigation menu' : 'Open navigation menu');
         if (isMenuOpen) {
           mobileMenu.classList.add('open');
           lines[0].style.transform = 'translateY(6px) rotate(45deg)';
@@ -690,74 +850,80 @@
           document.body.style.overflow = '';
         }
       }
-
       hamburger.addEventListener('click', toggleMenu);
       window.closeMenu = () => { if (isMenuOpen) toggleMenu(); };
 
-      // 2. GSAP Scroll Choreography
+      // ── 2. Hero entrance animation (GSAP) ───────────────────────
       gsap.registerPlugin(ScrollTrigger);
 
-      // Fade-up reveals (Soft Structuralism style)
-      const revealElements = document.querySelectorAll('.gsap-reveal');
-      revealElements.forEach((el) => {
+      const heroTl = gsap.timeline({ delay: 0.1 });
+      heroTl
+        .to('#hero-tag', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
+        .to('#hero-h1', { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.0, ease: 'power3.out' }, '-=0.4')
+        .to('#hero-sub', { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' }, '-=0.6')
+        .to('#hero-ctas', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+        .to('#hero-stats', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4');
+
+      // ── 3. Scroll reveals ────────────────────────────────────────
+      const revealEls = document.querySelectorAll('.gsap-reveal');
+      revealEls.forEach((el) => {
         gsap.to(el, {
           y: 0,
           opacity: 1,
           filter: 'blur(0px)',
-          duration: 1.2,
-          ease: "power3.out",
+          duration: 1.1,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: el,
-            start: "top 85%",
+            start: 'top 88%',
           }
         });
       });
-      // 3. GSAP Horizontal Scroll Hijack for Gallery (Desktop Only)
-      let mm = gsap.matchMedia();
 
-      mm.add("(min-width: 1024px)", () => {
-        const pinWrapper = document.getElementById('gallery-pin-wrapper');
+      // ── 4. Horizontal Gallery (desktop only) ────────────────────
+      gsap.matchMedia().add('(min-width: 1024px)', () => {
+        const portfolio = document.getElementById('portfolio');
         const track = document.getElementById('gallery-track');
-
-        if (pinWrapper && track) {
-          let getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
-          const tween = gsap.to(track, {
-            x: getScrollAmount,
-            ease: "none"
-          });
+        if (portfolio && track) {
+          const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
+          const tween = gsap.to(track, { x: getScrollAmount, ease: 'none' });
           ScrollTrigger.create({
-            trigger: pinWrapper,
-            start: "top top",
-            end: () => `+=${getScrollAmount() * -1}`,
+            trigger: portfolio,
+            start: 'top top',
+            end: () => `+=${Math.max(0, -getScrollAmount())}`,
             pin: true,
             animation: tween,
             scrub: 1,
-            invalidateOnRefresh: true
+            invalidateOnRefresh: true,
           });
         }
       });
-      // 4. WhatsApp Form Submission
-      const bookingForm = document.getElementById('booking-form');
 
+      // ── 5. Navbar hide on scroll ────────────────────────────────────
+      const header = document.getElementById('main-header');
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        if (!isMenuOpen) {
+          if (window.scrollY > lastScrollY && window.scrollY > 150) {
+            header.classList.add('-translate-y-[150%]');
+          } else {
+            header.classList.remove('-translate-y-[150%]');
+          }
+        }
+        lastScrollY = window.scrollY;
+      }, { passive: true });
+
+      // ── 6. WhatsApp form submission ──────────────────────────────
+      const bookingForm = document.getElementById('booking-form');
       if (bookingForm) {
         bookingForm.addEventListener('submit', function (e) {
           e.preventDefault();
-
-          const name = document.getElementById('booking-name').value;
+          const name    = document.getElementById('booking-name').value;
           const service = document.getElementById('booking-service').value;
-          const notes = document.getElementById('booking-notes').value;
-
-          if (!name || !service) {
-            alert('Please fill out all required fields.');
-            return;
-          }
-
-          let message = `Hello! I would like to book an appointment.%0A%0A*Name:* ${name}%0A*Service:* ${service}%0A*Notes:* ${notes ? notes : 'None'}`;
-
-          // Standard WhatsApp URL format (using the provided number)
-          const whatsappUrl = `https://wa.me/94712081576?text=${message}`;
-
-          window.open(whatsappUrl, '_blank');
+          const notes   = document.getElementById('booking-notes').value;
+          if (!name || !service) { alert('Please fill out all required fields.'); return; }
+          const msg = `Hello! I would like to book an appointment.%0A%0A*Name:* ${name}%0A*Service:* ${service}%0A*Notes:* ${notes ? notes : 'None'}`;
+          window.open(`https://wa.me/94712081576?text=${msg}`, '_blank');
         });
       }
 
