@@ -332,6 +332,12 @@
       transform: rotate(90deg);
     }
 
+    @media(max-width:639px) {
+      #lightbox-close { display: none; }
+      #lightbox { padding: .75rem; }
+      #lightbox img { max-width: 94vw; max-height: 82vh; }
+    }
+
     /* ── Category group wrapper ── */
     .cat-group {
       margin-bottom: 3rem;
@@ -868,8 +874,11 @@
         setTimeout(() => { lightboxImg.src = ''; }, 350);
       }
       document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+      // On touch screens, tapping the selected image returns to the gallery.
+      lightboxImg.addEventListener('click', closeLightbox);
       lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
     });
   </script>
 </body>
