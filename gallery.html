@@ -4,97 +4,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LS Nails Studio</title>
+  <title>Gallery — LS Nails Studio | Classic, Graphic & Maximalist</title>
   <link rel="icon" href="images/LOGO.png" type="image/png">
-  <meta name="description" content="View the complete nail art and beauty portfolio of LS Nails Studio.">
-
-  <!-- Premium Font Stack -->
+  <meta name="description"
+    content="Browse the full portfolio of LS Nails Studio — Classic, Graphic, and Maximalist nail art collections.">
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- GSAP Core & ScrollTrigger -->
+  <link rel="stylesheet" href="css/output.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            theme: {
-              bg: '#F7F3ED',
-              surface: '#EDE3D6',
-              light: '#F0EFEB',
-              highlight: '#FBF8F3',
-              text: '#1E140A',
-              accent: '#B8926A',
-              wine: '#B8926A',
-              wine2: '#9B7850',
-              dark: '#2C1F10',
-              darkSurface: '#2A1C0C'
-            }
-          },
-          fontFamily: {
-            display: ['Clash Display', 'sans-serif'],
-            body: ['Outfit', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
 
   <style>
     :root {
-      --container-max: 1240px;
+      --container-max: 1280px;
       --content-px: clamp(1.25rem, 3.5vw, 2.5rem);
     }
 
     body {
-      background-color: #F7F3ED;
+      background: #F7F3ED;
       color: #1E140A;
       font-family: 'Outfit', sans-serif;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
     ::selection {
-      background-color: #B8926A;
+      background: #B8926A;
       color: #F7F3ED;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: 'Clash Display', sans-serif;
-    }
-
-    /* Fluid Island Nav */
-    .nav-glass {
-      background: rgba(247, 243, 237, 0.92);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-    }
-
-    /* GSAP Base States */
-    .gsap-reveal {
-      opacity: 0;
-      transform: translateY(32px) scale(0.98);
-      filter: blur(8px);
-    }
-
-    /* Noise Texture */
-    .noise-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      pointer-events: none;
-      opacity: 0.032;
-      background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
     }
 
     .site-container {
@@ -104,323 +50,717 @@
       padding-inline: var(--content-px);
     }
 
-    /* Keep every archive photo in its original proportions. */
-    .gallery-columns { columns: 1; column-gap: 1rem; }
-    .gallery-item { display: inline-block; width: 100%; margin-bottom: 1rem; break-inside: avoid; }
-    .gallery-photo { display: block; width: 100%; height: auto; max-height: 36rem; object-fit: contain; }
-    @media (min-width: 640px) {
-      .gallery-columns { columns: 2; column-gap: 1.25rem; }
-      .gallery-item { margin-bottom: 1.25rem; }
+    .nav-glass {
+      background: rgba(247, 243, 237, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
-    @media (min-width: 1024px) {
-      .gallery-columns { columns: 3; column-gap: 1.5rem; }
-      .gallery-item { margin-bottom: 1.5rem; }
+
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.030;
+      background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');
     }
-    @media (min-width: 1280px) { .gallery-columns { columns: 4; } }
+
+    /* ── Filter Tabs ── */
+    .filter-tabs {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 1.25rem;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .3s cubic-bezier(.32, .72, 0, 1);
+      border: 1px solid rgba(30, 20, 10, .12);
+      background: transparent;
+      color: rgba(30, 20, 10, .45);
+      user-select: none;
+    }
+
+    .filter-tab:hover {
+      color: #1E140A;
+      border-color: rgba(30, 20, 10, .25);
+      background: rgba(237, 227, 214, .5);
+    }
+
+    .filter-tab.active {
+      background: #1E140A;
+      color: #F7F3ED;
+      border-color: #1E140A;
+    }
+
+    .filter-tab .count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.3rem;
+      height: 1.3rem;
+      border-radius: 50%;
+      font-size: .6rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .filter-tab.active .count {
+      background: rgba(247, 243, 237, .2);
+    }
+
+    /* ── Category Banner ── */
+    .cat-banner {
+      position: relative;
+      width: 100%;
+      height: clamp(200px, 32vh, 320px);
+      overflow: hidden;
+      border-radius: 1.25rem;
+      margin-bottom: 1.5rem;
+      cursor: default;
+    }
+
+    .cat-banner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 6s ease;
+    }
+
+    .cat-banner:hover img {
+      transform: scale(1.04);
+    }
+
+    .cat-banner .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(13, 8, 4, .88) 0%, rgba(13, 8, 4, .4) 60%, transparent 100%);
+    }
+
+    .cat-banner .content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .cat-banner .num {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-family: 'Clash Display', sans-serif;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .08);
+      line-height: 1;
+      margin-bottom: .25rem;
+    }
+
+    .cat-banner h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-family: 'Clash Display', sans-serif;
+      font-weight: 500;
+      color: #fff;
+      line-height: .95;
+      margin-bottom: .75rem;
+    }
+
+    .cat-banner p {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .55);
+      max-width: 36ch;
+      line-height: 1.65;
+    }
+
+    .cat-banner .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #B8926A;
+      margin-bottom: .6rem;
+    }
+
+    .cat-banner .tag::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: #B8926A;
+    }
+
+    /* ── Masonry ── */
+    .masonry-grid {
+      columns: 2;
+      column-gap: .875rem;
+    }
+
+    .masonry-item {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: .875rem;
+      break-inside: avoid;
+    }
+
+    @media(min-width:640px) {
+      .masonry-grid {
+        columns: 3;
+        column-gap: 1rem
+      }
+
+      .masonry-item {
+        margin-bottom: 1rem
+      }
+    }
+
+    @media(min-width:1024px) {
+      .masonry-grid {
+        columns: 4;
+        column-gap: 1.25rem
+      }
+
+      .masonry-item {
+        margin-bottom: 1.25rem
+      }
+    }
+
+    @media(min-width:1280px) {
+      .masonry-grid {
+        columns: 5
+      }
+    }
+
+    /* ── Photo Card ── */
+    .photo-card {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #EDE3D6;
+      cursor: zoom-in;
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 1.2s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(30, 20, 10, .45) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .photo-card:hover .overlay {
+      opacity: 1;
+    }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(30, 20, 10, .92);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+
+    #lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #lightbox img {
+      max-width: min(90vw, 780px);
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 1rem;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .6);
+      transform: scale(.94);
+      transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    #lightbox.open img {
+      transform: scale(1);
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: rgba(247, 243, 237, .1);
+      border: 1px solid rgba(247, 243, 237, .2);
+      color: #F7F3ED;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+
+    #lightbox-close:hover {
+      background: rgba(247, 243, 237, .2);
+      transform: rotate(90deg);
+    }
+
+    /* ── Category group wrapper ── */
+    .cat-group {
+      margin-bottom: 3rem;
+    }
+
+    .cat-group.hidden-group {
+      display: none;
+    }
+
+    .gsap-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+    }
   </style>
 </head>
 
 <body class="antialiased">
-
   <div class="noise-overlay"></div>
 
-  <!-- ══ FLUID ISLAND NAV (Minimal) ══════════════════════════════ -->
+  <!-- NAV -->
   <header class="fixed top-4 sm:top-5 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
     <div
       class="pointer-events-auto nav-glass rounded-full px-5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between shadow-[0_8px_32px_rgba(17,17,17,0.06)] border border-white/30 w-full max-w-5xl">
-      <a href="index.html" class="flex-shrink-0 relative flex items-center gap-3 group">
-        <img src="images/LOGO.png" alt="LS"
-          class="h-6 w-auto mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-          onerror="this.src='images/logo_white.jpg';" />
-        <span
-          class="text-[13px] font-display font-medium tracking-[0.15em] uppercase text-theme-text/90 group-hover:text-theme-text transition-colors duration-300 mt-[2px]">
-          NAILS STUDIO</span>
+      <a href="index.html" class="flex-shrink-0 flex items-center gap-3 group">
+        <img src="images/LOGO.png" alt="LS Nails Studio"
+          class="h-6 w-auto mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
+        <span class="text-[13px] font-display font-medium tracking-[0.15em] uppercase text-theme-text/90 mt-[2px]">Nails
+          Studio</span>
       </a>
-
-      <ul class="flex items-center">
-        <li>
-          <a href="index.html"
-            class="group cta-btn inline-flex items-center justify-center bg-theme-wine text-white pl-5 sm:pl-6 pr-2 py-1.5 sm:py-2 rounded-full hover:bg-theme-wine2 transition-colors duration-300">
-            <span class="text-xs sm:text-[13px] tracking-wide font-medium uppercase mr-3 sm:mr-4">Back to Studio</span>
-            <div
-              class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-x-[2px] group-hover:scale-105">
-              <i class="ph ph-arrow-left text-xs sm:text-sm"></i>
-            </div>
-          </a>
-        </li>
-      </ul>
+      <a href="index.html"
+        class="group inline-flex items-center justify-center bg-theme-wine text-white pl-5 sm:pl-6 pr-2 py-1.5 sm:py-2 rounded-full hover:bg-theme-wine2 transition-colors duration-300">
+        <span class="text-xs sm:text-[13px] tracking-wide font-medium uppercase mr-3 sm:mr-4">Back to Studio</span>
+        <div
+          class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-500 group-hover:-translate-x-[2px]">
+          <i class="ph ph-arrow-left text-xs sm:text-sm"></i>
+        </div>
+      </a>
     </div>
   </header>
 
-  <!-- ══ EDITORIAL HERO HEADER ════════════════════════════════════ -->
-  <section class="pt-28 pb-8 sm:pt-32 sm:pb-10 lg:pb-12 relative overflow-hidden">
+  <!-- HERO -->
+  <section class="pt-28 pb-10 sm:pt-32 sm:pb-12">
     <div class="site-container">
-      <div class="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 lg:gap-10">
-
-        <div class="max-w-2xl">
-          <div class="gsap-header inline-flex items-center gap-2 mb-4 opacity-0">
-            <span class="w-6 h-[1px] bg-theme-text/30"></span>
-            <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-theme-text/60">Archive</span>
+      <div class="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-12">
+        <div class="max-w-xl">
+          <div class="gsap-header inline-flex items-center gap-2.5 mb-5 opacity-0">
+            <span
+              style="width:6px;height:6px;border-radius:50%;background:#B8926A;display:inline-block;flex-shrink:0"></span>
+            <span class="text-[10px] uppercase tracking-[0.22em] font-medium text-theme-text/50">Portfolio
+              Archive</span>
           </div>
-
           <h1
-            class="gsap-header opacity-0 text-5xl sm:text-6xl md:text-7xl font-display font-medium leading-[0.9] tracking-tight text-theme-text">
-            Gallery
+            class="gsap-header opacity-0 text-5xl sm:text-6xl md:text-[5.5rem] font-display font-medium leading-[0.88] tracking-tight text-theme-text">
+            The<br><em style="font-style:italic;color:#B8926A;">Gallery</em>
           </h1>
         </div>
-
-        <div class="gsap-header opacity-0 lg:pb-1 max-w-sm">
-          <p class="text-sm sm:text-base text-theme-text/70 leading-relaxed">
-            A comprehensive visual record of our precision nail art and beauty disciplines.
+        <div class="gsap-header opacity-0 lg:pb-2 max-w-sm">
+          <p class="text-sm sm:text-base text-theme-text/55 leading-relaxed mb-5">
+            Three distinct design languages — each crafted with the same precision. Filter by style or browse the full
+            archive below.
           </p>
+          <div id="filter-tabs" class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All <span class="count" id="count-all">0</span></button>
+            <button class="filter-tab" data-filter="classic">Classic <span class="count"
+                id="count-classic">0</span></button>
+            <button class="filter-tab" data-filter="graphic">Graphic <span class="count"
+                id="count-graphic">0</span></button>
+            <button class="filter-tab" data-filter="maximalist">Maximalist <span class="count"
+                id="count-maximalist">0</span></button>
+          </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ══ MASONRY GALLERY ═══════════════════════════════════════ -->
-  <section class="pb-16 sm:pb-20 lg:pb-24">
+  <!-- GALLERY -->
+  <section class="pb-20 sm:pb-24 lg:pb-32">
     <div class="site-container">
 
-      <div class="gallery-columns">
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/heloooo.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+      <!-- ════ CLASSIC GROUP ════ -->
+      <div class="cat-group" data-group="classic" id="group-classic">
+        <!-- Banner -->
+        <div class="cat-banner gsap-reveal">
+          <img src="images/classic_14.jpg" alt="Classic nails" loading="lazy" />
+          <div class="overlay"></div>
+          <div class="content">
+            <span class="tag">Style 01</span>
+            <div class="num">01</div>
+            <h2>Classic</h2>
+            <p>Timeless shades, flawless finish. Clean lines and enduring elegance built for longevity.</p>
+          </div>
+        </div>
+        <!-- Grid -->
+        <div class="masonry-grid">
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_01.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_02.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_03.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_04.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_05.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_06.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_07.png" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_08.png" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_09.png" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_10.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_11.png" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_12.png" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_13.png" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_15.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_16.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_17.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_18.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
         </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_0017.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+      </div>
+
+      <!-- ════ GRAPHIC GROUP ════ -->
+      <div class="cat-group" data-group="graphic" id="group-graphic">
+        <div class="cat-banner gsap-reveal">
+          <img src="images/graphic_03.jpg" alt="Graphic nails" loading="lazy" />
+          <div class="overlay"></div>
+          <div class="content">
+            <span class="tag">Style 02</span>
+            <div class="num">02</div>
+            <h2>Graphic</h2>
+            <p>Bold shapes, unexpected colour pairings. Art you wear right on your fingertips.</p>
+          </div>
+        </div>
+        <div class="masonry-grid">
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_01.jpg" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_02.jpg" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_04.png" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_06.png" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_07.jpg" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_08.jpg" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_09.jpg" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_11.jpg" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_14.jpg" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_16.png" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_17.png" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_18.png" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_19.png" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="graphic">
+            <div class="photo-card"><img src="images/graphic_20.png" loading="lazy" alt="Graphic nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
         </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_0019.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
-            </div>
+      </div>
+
+      <!-- ════ MAXIMALIST GROUP ════ -->
+      <div class="cat-group" data-group="maximalist" id="group-maximalist">
+        <div class="cat-banner gsap-reveal">
+          <img src="images/maximalist_15.jpg" alt="Maximalist nails" loading="lazy" />
+          <div class="overlay"></div>
+          <div class="content">
+            <span class="tag">Style 03</span>
+            <div class="num">03</div>
+            <h2>Maximalist</h2>
+            <p>Embellishments, textures, drama. For those who believe more is always more.</p>
           </div>
         </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_1857.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+        <div class="masonry-grid">
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_01.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_1858.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_02.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_1859.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_03.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_1861.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_04.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_4207.JPG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_05.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_4971.JPG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_06.jpg" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_7292.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_07.jpg" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_7658.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_08.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_7838.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_10.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_7839.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_11.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_8086.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_12.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_8088.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_13.jpg" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_8089.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_16.jpg" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_8240.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_19.jpg" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_8783.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_20.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_8888.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_22.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_9284.JPG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_23.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_9452.JPG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_24.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG_9874.PNG" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_25.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG-20260913-WA0036.jpg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_26.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG-20260913-WA0037.jpg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_27.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG-20260913-WA0038.jpg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_28.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG-20260913-WA0039.jpg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_29.jpg" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG-20260913-WA0040.jpg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_30.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG-20260913-WA0049.jpg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_31.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/IMG-20260913-WA0050.jpg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_32.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
-        </div>
-        <div class="gsap-reveal group gallery-item">
-          <div class="p-1 rounded-[1.5rem] bg-theme-highlight border border-white/60 shadow-2xl">
-            <div class="relative rounded-[calc(1.5rem-0.25rem)] overflow-hidden bg-theme-surface/50">
-              <img src="images/imgnew.jpeg" loading="lazy" alt="Nail Art"
-                class="gallery-photo transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_33.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_34.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_35.png" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="maximalist">
+            <div class="photo-card"><img src="images/maximalist_36.jpg" loading="lazy" alt="Maximalist nail art" />
+              <div class="overlay"></div>
             </div>
           </div>
         </div>
@@ -429,13 +769,18 @@
     </div>
   </section>
 
-  <!-- ══ FLOATING WHATSAPP BUTTON ══════════════════════════════ -->
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+    <button id="lightbox-close" aria-label="Close"><i class="ph ph-x text-base"></i></button>
+    <img id="lightbox-img" src="" alt="Nail art close-up" />
+  </div>
+
+  <!-- WHATSAPP -->
   <a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer"
     class="fixed bottom-6 right-6 z-50 flex items-center gap-3 group" aria-label="Chat on WhatsApp">
     <span
-      class="bg-white text-[#1A1208] text-sm font-medium px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none hidden sm:block">
-      Chat now
-    </span>
+      class="bg-white text-[#1A1208] text-sm font-medium px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none hidden sm:block">Chat
+      now</span>
     <div
       class="w-14 h-14 bg-[#1A1208] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 relative border border-white/10">
       <i class="ph ph-whatsapp-logo text-3xl"></i>
@@ -451,30 +796,78 @@
       gsap.registerPlugin(ScrollTrigger);
 
       // Hero animation
-      gsap.to('.gsap-header', {
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        stagger: 0.15,
-        ease: "power4.out",
-        delay: 0.2
+      gsap.utils.toArray('.gsap-header').forEach((el, i) => {
+        gsap.fromTo(el, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.4, delay: 0.15 + i * 0.12, ease: "power4.out" });
       });
 
-      // Cinematic fade-up reveals for gallery items
-      const revealElements = document.querySelectorAll('.gsap-reveal');
-
-      ScrollTrigger.batch(revealElements, {
-        onEnter: batch => gsap.to(batch, {
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)',
-          duration: 1.4,
-          stagger: 0.1,
-          ease: "power3.out"
-        }),
-        start: "top 90%",
+      // Count items per category
+      const allItems = document.querySelectorAll('.masonry-item');
+      const counts = { all: 0, classic: 0, graphic: 0, maximalist: 0 };
+      allItems.forEach(item => {
+        const cat = item.dataset.category;
+        counts[cat] = (counts[cat] || 0) + 1;
+        counts.all++;
       });
+      document.getElementById('count-all').textContent = counts.all;
+      document.getElementById('count-classic').textContent = counts.classic;
+      document.getElementById('count-graphic').textContent = counts.graphic;
+      document.getElementById('count-maximalist').textContent = counts.maximalist;
+
+      // Initial reveal
+      gsap.to('.cat-banner.gsap-reveal', { opacity: 1, y: 0, duration: 1.2, stagger: 0.15, ease: "power3.out", delay: 0.45 });
+      gsap.to('.masonry-item.gsap-reveal', { opacity: 1, y: 0, duration: 1.1, stagger: 0.025, ease: "power3.out", delay: 0.55 });
+
+      // Filter
+      const tabs = document.querySelectorAll('.filter-tab');
+      const groups = document.querySelectorAll('.cat-group');
+
+      function applyFilter(filter) {
+        tabs.forEach(t => t.classList.remove('active'));
+        const activeTab = document.querySelector(`.filter-tab[data-filter="${filter}"]`);
+        if (activeTab) activeTab.classList.add('active');
+
+        groups.forEach(g => {
+          const groupCat = g.dataset.group;
+          if (filter === 'all' || filter === groupCat) {
+            g.style.display = 'block';
+            gsap.fromTo(g, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
+          } else {
+            gsap.to(g, { opacity: 0, duration: 0.2, ease: "power2.in", onComplete: () => { g.style.display = 'none'; } });
+          }
+        });
+
+        ScrollTrigger.refresh();
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => applyFilter(tab.dataset.filter));
+      });
+
+      // Handle URL param ?filter=classic|graphic|maximalist
+      const urlFilter = new URLSearchParams(window.location.search).get('filter');
+      if (urlFilter && ['classic', 'graphic', 'maximalist'].includes(urlFilter)) {
+        applyFilter(urlFilter);
+      }
+
+      // Lightbox
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      document.querySelectorAll('.photo-card').forEach(card => {
+        card.addEventListener('click', () => {
+          lightboxImg.src = card.querySelector('img').src;
+          lightboxImg.alt = card.querySelector('img').alt;
+          lightbox.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { lightboxImg.src = ''; }, 350);
+      }
+      document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     });
   </script>
 </body>
