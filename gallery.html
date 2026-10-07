@@ -333,9 +333,18 @@
     }
 
     @media(max-width:639px) {
-      #lightbox-close { display: none; }
-      #lightbox { padding: .75rem; }
-      #lightbox img { max-width: 94vw; max-height: 82vh; }
+      #lightbox-close {
+        display: none;
+      }
+
+      #lightbox {
+        padding: .75rem;
+      }
+
+      #lightbox img {
+        max-width: 94vw;
+        max-height: 82vh;
+      }
     }
 
     /* ── Category group wrapper ── */
@@ -516,6 +525,11 @@
           </div>
           <div class="masonry-item gsap-reveal" data-category="classic">
             <div class="photo-card"><img src="images/classic_18.jpg" loading="lazy" alt="Classic nail art" />
+              <div class="overlay"></div>
+            </div>
+          </div>
+          <div class="masonry-item gsap-reveal" data-category="classic">
+            <div class="photo-card"><img src="images/classic_19.jpg" loading="lazy" alt="Classic nail art" />
               <div class="overlay"></div>
             </div>
           </div>
@@ -801,12 +815,22 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      gsap.registerPlugin(ScrollTrigger);
+      const hasMotionLibrary = Boolean(window.gsap && window.ScrollTrigger);
+      if (hasMotionLibrary) gsap.registerPlugin(ScrollTrigger);
+      else {
+        document.querySelectorAll('.gsap-header').forEach(el => el.classList.remove('opacity-0'));
+        document.querySelectorAll('.gsap-reveal').forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      }
 
       // Hero animation
-      gsap.utils.toArray('.gsap-header').forEach((el, i) => {
-        gsap.fromTo(el, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.4, delay: 0.15 + i * 0.12, ease: "power4.out" });
-      });
+      if (hasMotionLibrary) {
+        gsap.utils.toArray('.gsap-header').forEach((el, i) => {
+          gsap.fromTo(el, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.4, delay: 0.15 + i * 0.12, ease: "power4.out" });
+        });
+      }
 
       // Count items per category
       const allItems = document.querySelectorAll('.masonry-item');
@@ -822,8 +846,10 @@
       document.getElementById('count-maximalist').textContent = counts.maximalist;
 
       // Initial reveal
-      gsap.to('.cat-banner.gsap-reveal', { opacity: 1, y: 0, duration: 1.2, stagger: 0.15, ease: "power3.out", delay: 0.45 });
-      gsap.to('.masonry-item.gsap-reveal', { opacity: 1, y: 0, duration: 1.1, stagger: 0.025, ease: "power3.out", delay: 0.55 });
+      if (hasMotionLibrary) {
+        gsap.to('.cat-banner.gsap-reveal', { opacity: 1, y: 0, duration: 1.2, stagger: 0.15, ease: "power3.out", delay: 0.45 });
+        gsap.to('.masonry-item.gsap-reveal', { opacity: 1, y: 0, duration: 1.1, stagger: 0.025, ease: "power3.out", delay: 0.55 });
+      }
 
       // Filter
       const tabs = document.querySelectorAll('.filter-tab');
@@ -836,15 +862,25 @@
 
         groups.forEach(g => {
           const groupCat = g.dataset.group;
+          if (hasMotionLibrary) gsap.killTweensOf(g);
           if (filter === 'all' || filter === groupCat) {
             g.style.display = 'block';
-            gsap.fromTo(g, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
+            if (hasMotionLibrary) {
+              gsap.fromTo(g, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
+            } else {
+              g.style.opacity = '1';
+              g.style.transform = 'none';
+            }
           } else {
-            gsap.to(g, { opacity: 0, duration: 0.2, ease: "power2.in", onComplete: () => { g.style.display = 'none'; } });
+            if (hasMotionLibrary) {
+              gsap.to(g, { opacity: 0, duration: 0.2, ease: "power2.in", onComplete: () => { g.style.display = 'none'; } });
+            } else {
+              g.style.display = 'none';
+            }
           }
         });
 
-        ScrollTrigger.refresh();
+        if (hasMotionLibrary) ScrollTrigger.refresh();
       }
 
       tabs.forEach(tab => {
@@ -860,8 +896,10 @@
       // Lightbox
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
+      let lightboxClearTimer;
       document.querySelectorAll('.photo-card').forEach(card => {
         card.addEventListener('click', () => {
+          clearTimeout(lightboxClearTimer);
           lightboxImg.src = card.querySelector('img').src;
           lightboxImg.alt = card.querySelector('img').alt;
           lightbox.classList.add('open');
@@ -871,7 +909,8 @@
       function closeLightbox() {
         lightbox.classList.remove('open');
         document.body.style.overflow = '';
-        setTimeout(() => { lightboxImg.src = ''; }, 350);
+        clearTimeout(lightboxClearTimer);
+        lightboxClearTimer = setTimeout(() => { lightboxImg.src = ''; }, 350);
       }
       document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
       // On touch screens, tapping the selected image returns to the gallery.

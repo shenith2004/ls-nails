@@ -433,7 +433,7 @@
         <div id="hero-stats"
           class="flex gap-6 sm:gap-8 mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-theme-text/10 hero-animated">
           <div>
-            <p class="text-xl sm:text-2xl font-display font-medium text-theme-text">5+</p>
+            <p class="text-xl sm:text-2xl font-display font-medium text-theme-text">3+</p>
             <p class="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-theme-text/40 mt-0.5">Years crafting
             </p>
           </div>
@@ -631,7 +631,7 @@
 
   <!-- ══ PORTFOLIO: 3-PANEL SPLIT ══════════════════════════════ -->
   <section id="portfolio" class="relative overflow-hidden rounded-[2rem] mx-2 sm:mx-4 lg:mx-6 my-2 sm:my-4"
-    style="background:#261A20">
+    style="background:#1A120B">
 
     <!-- Top header row -->
     <div class="site-container pt-10 sm:pt-12 pb-7 sm:pb-9 relative z-10">
@@ -800,7 +800,7 @@
           <!-- Floating accent card -->
           <div class="absolute -bottom-3 -right-3 lg:right-4 stat-card hidden sm:block py-2 px-3.5">
             <p class="text-[9px] uppercase tracking-[0.18em] text-theme-text/40 mb-0.5">Established</p>
-            <p class="text-lg font-display font-medium text-theme-text">2019</p>
+            <p class="text-lg font-display font-medium text-theme-text">2023</p>
           </div>
         </div>
 
@@ -1083,12 +1083,12 @@
       if (bookingForm) {
         bookingForm.addEventListener('submit', function (e) {
           e.preventDefault();
-          const name = document.getElementById('booking-name').value;
+          const name = document.getElementById('booking-name').value.trim();
           const service = document.getElementById('booking-service').value;
-          const notes = document.getElementById('booking-notes').value;
+          const notes = document.getElementById('booking-notes').value.trim();
           if (!name || !service) { alert('Please fill out all required fields.'); return; }
-          const msg = `Hello! I would like to book an appointment.%0A%0A*Name:* ${name}%0A*Service:* ${service}%0A*Notes:* ${notes ? notes : 'None'}`;
-          window.open(`https://wa.me/94712081576?text=${msg}`, '_blank');
+          const msg = `Hello! I would like to book an appointment.\n\n*Name:* ${name}\n*Service:* ${service}\n*Notes:* ${notes || 'None'}`;
+          window.open(`https://wa.me/94712081576?${new URLSearchParams({ text: msg })}`, '_blank', 'noopener,noreferrer');
         });
       }
 
