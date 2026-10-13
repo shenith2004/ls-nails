@@ -6,30 +6,34 @@
 
   /* ── Site Footer ── */
   .site-footer {
-    background: linear-gradient(135deg, #2C1F10 0%, #1E140A 100%);
+    background: linear-gradient(135deg, #2C1F10 0%, #1A1208 100%);
     color: #F7F3ED;
-    padding-block: clamp(2.75rem, 6vw, 4.5rem) 1.5rem;
+    padding-block: clamp(2.75rem, 5vw, 4rem) 1.75rem;
+    border-top: 1px solid rgba(184, 146, 106, 0.2);
   }
 
   .footer-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
   }
 
   @media (min-width: 640px) {
     .footer-inner {
-      grid-template-columns: minmax(180px, 1fr) auto;
+      flex-direction: row;
       align-items: center;
-      column-gap: 2rem;
-      row-gap: 1.75rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
     }
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 1024px) {
     .footer-inner {
-      grid-template-columns: minmax(200px, 1fr) auto auto;
-      column-gap: clamp(2rem, 5vw, 5rem);
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 3rem;
     }
   }
 
@@ -37,42 +41,45 @@
   .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.35rem;
   }
 
   .footer-brand > a {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     text-decoration: none;
   }
 
   .footer-brand img {
-    height: 24px;
+    height: 26px;
     width: auto !important;
+    max-width: 120px;
     display: block;
     filter: brightness(0) invert(1);
   }
 
   .footer-brand-name {
     font-family: 'Clash Display', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #F7F3ED;
   }
 
   .footer-tagline {
     font-size: 11px;
-    color: rgba(247, 243, 237, 0.56);
+    color: rgba(247, 243, 237, 0.55);
     margin: 0;
+    letter-spacing: 0.02em;
   }
 
   /* Nav */
   .footer-nav ul {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.65rem 1.5rem;
     list-style: none;
     padding: 0;
@@ -97,8 +104,8 @@
   .footer-socials a:focus-visible,
   .footer-brand a:focus-visible {
     outline: 2px solid #D8B894;
-    outline-offset: 5px;
-    border-radius: 2px;
+    outline-offset: 4px;
+    border-radius: 4px;
   }
 
   /* Socials */
@@ -106,27 +113,20 @@
     display: flex;
     align-items: center;
     gap: 0.65rem;
-    justify-self: start;
-  }
-
-  @media (min-width: 640px) and (max-width: 899px) {
-    .footer-socials {
-      grid-column: 1 / -1;
-    }
   }
 
   .footer-socials a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 1px solid rgba(247, 243, 237, 0.18);
-    border-radius: 999px;
-    font-size: 20px;
-    color: rgba(247, 243, 237, 0.7);
+    border-radius: 9999px;
+    font-size: 18px;
+    color: rgba(247, 243, 237, 0.75);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     line-height: 1;
   }
 
@@ -134,16 +134,32 @@
     color: #D8B894;
     border-color: rgba(216, 184, 148, 0.65);
     transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.04);
   }
 
-  /* Copyright */
-  .footer-copy {
+  /* Bottom bar */
+  .footer-bottom {
     margin-top: 2rem;
-    font-size: 10px;
-    letter-spacing: 0.04em;
-    color: rgba(247, 243, 237, 0.48);
     padding-top: 1.25rem;
-    border-top: 1px solid rgba(247, 243, 237, 0.14);
+    border-top: 1px solid rgba(247, 243, 237, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 11px;
+    color: rgba(247, 243, 237, 0.45);
+  }
+
+  @media (min-width: 640px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .footer-copy {
+    margin: 0;
+    letter-spacing: 0.04em;
   }
 
 }

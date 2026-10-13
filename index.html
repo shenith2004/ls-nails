@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LS Nails Studio — Premium Nail Art, Lash Extensions & Waxing in Negombo</title>
 
-  <link rel="canonical" href="https://ls-nails.pages.dev/" />
+  <link rel="canonical" href="https://lsnails.lk/" />
 
   <meta name="robots" content="index, follow">
 
@@ -15,6 +15,11 @@
   <meta name="description"
     content="LS Nails Studio in Negombo — precision nail extensions, gel nail art, eyelash extensions, and waxing. Book your appointment today.">
 
+  <!-- Local SEO -->
+  <meta name="geo.region" content="LK-1">
+  <meta name="geo.placename" content="Negombo">
+  <meta name="geo.position" content="7.2008;79.8737">
+  <meta name="ICBM" content="7.2008, 79.8737">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -22,8 +27,8 @@
   <meta property="og:title" content="LS Nails Studio — Premium Nail Art &amp; Beauty in Negombo">
   <meta property="og:description"
     content="Precision nail extensions, gel nail art, eyelash extensions, and waxing in Negombo. A quiet, intentional studio built for meticulous craft.">
-  <meta property="og:url" content="https://ls-nails.pages.dev/">
-  <meta property="og:image" content="https://ls-nails.pages.dev/images/1_web.jpg">
+  <meta property="og:url" content="https://lsnails.lk/">
+  <meta property="og:image" content="https://lsnails.lk/images/1_web.jpg">
   <meta property="og:image:alt" content="LS Nails Studio — dark red nail extensions close-up">
   <meta property="og:locale" content="en_LK">
 
@@ -32,7 +37,7 @@
   <meta name="twitter:title" content="LS Nails Studio — Premium Nail Art &amp; Beauty in Negombo">
   <meta name="twitter:description"
     content="Precision nail extensions, gel nail art, eyelash extensions, and waxing in Negombo. Book your appointment today.">
-  <meta name="twitter:image" content="https://ls-nails.pages.dev/images/1_web.jpg">
+  <meta name="twitter:image" content="https://lsnails.lk/images/1_web.jpg">
   <meta name="twitter:image:alt" content="LS Nails Studio — dark red nail extensions close-up">
 
   <!-- Preconnect for external resources -->
@@ -46,7 +51,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="css/output.css">
+  <link rel="stylesheet" href="css/output.css?v=20261013">
 
   <!-- GSAP Core & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -62,19 +67,25 @@
     "@graph": [
       {
         "@type": "BeautySalon",
-        "@id": "https://ls-nails.pages.dev/#business",
+        "@id": "https://lsnails.lk/#business",
         "name": "LS Nails Studio",
-        "url": "https://ls-nails.pages.dev/",
-        "logo": "https://ls-nails.pages.dev/images/LOGO.png",
-        "image": "https://ls-nails.pages.dev/images/1_web.jpg",
+        "url": "https://lsnails.lk/",
+        "logo": "https://lsnails.lk/images/LOGO.png",
+        "image": "https://lsnails.lk/images/1_web.jpg",
         "description": "A premium nail art, eyelash extensions, and waxing studio in Negombo, Sri Lanka. Precision craft in a quiet, intentional space.",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Sweet Home",
           "addressLocality": "Negombo",
           "addressCountry": "LK"
         },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 7.2008,
+          "longitude": 79.8737
+        },
         "telephone": "+94712081576",
-        "email": "hello@lsnails.co.uk",
+        "email": "pleesha59@gmail.com",
         "sameAs": [
           "https://www.instagram.com/__ls_nails__",
           "https://www.facebook.com/profile.php?id=100091059944803",
@@ -82,6 +93,7 @@
         ],
         "openingHours": "Mo-Sa 09:00-18:00",
         "priceRange": "$$",
+        "currenciesAccepted": "LKR",
         "hasMap": "https://maps.app.goo.gl/BYhdrHYuN5BCNXjYA",
         "serviceType": [
           "Nail Extensions",
@@ -94,19 +106,19 @@
       },
       {
         "@type": "WebSite",
-        "@id": "https://ls-nails.pages.dev/#website",
-        "url": "https://ls-nails.pages.dev/",
+        "@id": "https://lsnails.lk/#website",
+        "url": "https://lsnails.lk/",
         "name": "LS Nails Studio",
-        "publisher": { "@id": "https://ls-nails.pages.dev/#business" }
+        "publisher": { "@id": "https://lsnails.lk/#business" }
       },
       {
         "@type": "WebPage",
-        "@id": "https://ls-nails.pages.dev/#webpage",
-        "url": "https://ls-nails.pages.dev/",
+        "@id": "https://lsnails.lk/#webpage",
+        "url": "https://lsnails.lk/",
         "name": "LS Nails Studio — Premium Nail Art, Lash Extensions & Waxing in Negombo",
         "description": "Precision nail extensions, gel nail art, eyelash extensions, and waxing in Negombo. Book your appointment today.",
-        "isPartOf": { "@id": "https://ls-nails.pages.dev/#website" },
-        "about": { "@id": "https://ls-nails.pages.dev/#business" }
+        "isPartOf": { "@id": "https://lsnails.lk/#website" },
+        "about": { "@id": "https://lsnails.lk/#business" }
       }
     ]
   }
@@ -394,6 +406,152 @@
       text-transform: uppercase;
       font-weight: 500;
       opacity: 0.6;
+    }
+
+    /* ── Site Footer ── */
+    .site-footer {
+      background: linear-gradient(135deg, #2C1F10 0%, #1A1208 100%);
+      color: #F7F3ED;
+      padding-block: clamp(2.75rem, 5vw, 4rem) 1.75rem;
+      border-top: 1px solid rgba(184, 146, 106, 0.2);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-inner {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+        gap: 3rem;
+      }
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .footer-brand > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .footer-brand img {
+      height: 26px;
+      width: auto !important;
+      max-width: 120px;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-brand-name {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F7F3ED;
+    }
+
+    .footer-tagline {
+      font-size: 11px;
+      color: rgba(247, 243, 237, 0.55);
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-nav a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(247, 243, 237, 0.65);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: #D8B894;
+    }
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .footer-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid rgba(247, 243, 237, 0.18);
+      border-radius: 9999px;
+      font-size: 18px;
+      color: rgba(247, 243, 237, 0.75);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      line-height: 1;
+    }
+
+    .footer-socials a:hover {
+      color: #D8B894;
+      border-color: rgba(216, 184, 148, 0.65);
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(247, 243, 237, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 11px;
+      color: rgba(247, 243, 237, 0.45);
+    }
+
+    @media (min-width: 640px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .footer-copy {
+      margin: 0;
+      letter-spacing: 0.04em;
     }
   </style>
 </head>
@@ -1059,15 +1217,15 @@
   </section>
 
   <!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
-  <footer class="site-footer" role="contentinfo">
+  <footer class="site-footer bg-[#2C1F10] text-[#F7F3ED]" role="contentinfo" style="background: linear-gradient(135deg, #2C1F10 0%, #1A1208 100%); color: #F7F3ED;">
     <div class="site-container">
       <div class="footer-inner">
 
         <!-- Brand -->
         <div class="footer-brand">
           <a href="/" aria-label="LS Nails Studio home">
-            <img src="images/LOGO.png" alt="LS Nails Studio logo" />
-            <span class="footer-brand-name">Nails Studio</span>
+            <img src="images/LOGO.png" alt="LS Nails Studio logo" class="h-6 sm:h-7 w-auto object-contain brightness-0 invert" style="height: 26px; width: auto; max-width: 120px; filter: brightness(0) invert(1);" />
+            <span class="footer-brand-name font-display font-medium text-xs sm:text-[13px] tracking-[0.18em] uppercase text-[#F7F3ED]">Nails Studio</span>
           </a>
           <p class="footer-tagline">Negombo, Sri Lanka &middot; Est. 2023</p>
         </div>
@@ -1103,7 +1261,12 @@
         </div>
 
       </div>
-      <p class="footer-copy">&copy; <span id="footer-year"></span> LS Nails Studio. All rights reserved.</p>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; <span id="footer-year"></span> LS Nails Studio. All rights reserved.</p>
+        <p class="footer-copy">Crafted for Luxury &middot; Negombo, Sri Lanka</p>
+      </div>
     </div>
   </footer>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>

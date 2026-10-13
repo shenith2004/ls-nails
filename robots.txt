@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /private/
 
 # Sitemap
-Sitemap: https://ls-nails.pages.dev/sitemap.xml
+Sitemap: https://lsnails.lk/sitemap.xml
