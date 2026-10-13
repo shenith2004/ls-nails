@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block any future admin or private directories
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://ls-nails.pages.dev/sitemap.xml
