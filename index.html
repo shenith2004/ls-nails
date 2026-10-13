@@ -1052,56 +1052,52 @@
   </section>
 
   <!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
-  <footer role="contentinfo" class="bg-theme-bg border-t border-theme-text/8 py-10 sm:py-12">
+  <footer class="site-footer" role="contentinfo">
     <div class="site-container">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+      <div class="footer-inner">
+
         <!-- Brand -->
-        <div>
-          <a href="/" aria-label="LS Nails Studio — home" class="flex items-center gap-2 mb-2">
-            <img src="images/LOGO.png" alt="LS Nails Studio logo" class="h-5 w-auto mix-blend-multiply" />
-            <span class="text-xs font-medium tracking-[0.15em] uppercase text-theme-text/70">Nails Studio</span>
+        <div class="footer-brand">
+          <a href="/" aria-label="LS Nails Studio home">
+            <img src="images/LOGO.png" alt="LS Nails Studio logo" />
+            <span class="footer-brand-name">Nails Studio</span>
           </a>
-          <p class="text-xs text-theme-text/40">Negombo, Sri Lanka &middot; Est. 2023</p>
+          <p class="footer-tagline">Negombo, Sri Lanka &middot; Est. 2023</p>
         </div>
 
-        <!-- Nav links -->
-        <nav aria-label="Footer navigation">
-          <ul class="flex flex-wrap gap-x-6 gap-y-2 text-xs font-medium uppercase tracking-wide text-theme-text/50">
-            <li><a href="#services" class="hover:text-theme-text transition-colors">Services</a></li>
-            <li><a href="#portfolio" class="hover:text-theme-text transition-colors">Portfolio</a></li>
-            <li><a href="gallery.html" class="hover:text-theme-text transition-colors">Gallery</a></li>
-            <li><a href="#studio" class="hover:text-theme-text transition-colors">Studio</a></li>
-            <li><a href="#contact" class="hover:text-theme-text transition-colors">Book</a></li>
+        <!-- Nav -->
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#contact">Book</a></li>
           </ul>
         </nav>
 
-        <!-- Social links -->
-        <div class="flex items-center gap-4">
-          <a href="https://www.instagram.com/__ls_nails__" target="_blank" rel="noopener noreferrer"
-            aria-label="LS Nails Studio on Instagram" class="text-theme-text/40 hover:text-[#B8926A] transition-colors">
-            <i class="ph ph-instagram-logo text-xl"></i>
+        <!-- Socials -->
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/__ls_nails__" target="_blank" rel="noopener noreferrer" aria-label="LS Nails Studio on Instagram">
+            <i class="ph ph-instagram-logo"></i>
           </a>
-          <a href="https://www.facebook.com/profile.php?id=100091059944803" target="_blank" rel="noopener noreferrer"
-            aria-label="LS Nails Studio on Facebook" class="text-theme-text/40 hover:text-[#B8926A] transition-colors">
-            <i class="ph ph-facebook-logo text-xl"></i>
+          <a href="https://www.facebook.com/profile.php?id=100091059944803" target="_blank" rel="noopener noreferrer" aria-label="LS Nails Studio on Facebook">
+            <i class="ph ph-facebook-logo"></i>
           </a>
-          <a href="https://www.tiktok.com/@ls_nails__" target="_blank" rel="noopener noreferrer"
-            aria-label="LS Nails Studio on TikTok" class="text-theme-text/40 hover:text-[#B8926A] transition-colors">
-            <i class="ph ph-tiktok-logo text-xl"></i>
+          <a href="https://www.tiktok.com/@ls_nails__" target="_blank" rel="noopener noreferrer" aria-label="LS Nails Studio on TikTok">
+            <i class="ph ph-tiktok-logo"></i>
           </a>
-          <a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer"
-            aria-label="Chat with LS Nails Studio on WhatsApp" class="text-theme-text/40 hover:text-[#B8926A] transition-colors">
-            <i class="ph ph-whatsapp-logo text-xl"></i>
+          <a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+            <i class="ph ph-whatsapp-logo"></i>
           </a>
         </div>
-      </div>
 
-      <p class="mt-8 text-[10px] text-theme-text/30 tracking-wide">
-        &copy; <span id="footer-year"></span> LS Nails Studio. All rights reserved.
-      </p>
+      </div>
+      <p class="footer-copy">&copy; <span id="footer-year"></span> LS Nails Studio. All rights reserved.</p>
     </div>
   </footer>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
 
   <!-- ══ FLOATING WHATSAPP ═══════════════════════════════════════ -->
   <a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer"
