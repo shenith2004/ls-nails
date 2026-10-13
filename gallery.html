@@ -9,12 +9,14 @@
   <meta name="author" content="LS Nails Studio">
   <title>Nail Art Gallery — LS Nails Studio | Classic, Graphic & Maximalist Designs</title>
   <link rel="icon" href="images/LOGO.png" type="image/png">
-  <meta name="description" content="Browse the full LS Nails Studio portfolio — Classic, Graphic, and Maximalist nail art collections from our Negombo studio. Over 60 photos of precision nail work.">
+  <meta name="description"
+    content="Browse the full LS Nails Studio portfolio — Classic, Graphic, and Maximalist nail art collections from our Negombo studio. Over 60 photos of precision nail work.">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="LS Nails Studio">
   <meta property="og:title" content="Nail Art Gallery — LS Nails Studio">
-  <meta property="og:description" content="Browse Classic, Graphic, and Maximalist nail art collections from LS Nails Studio in Negombo. Over 60 portfolio photos.">
+  <meta property="og:description"
+    content="Browse Classic, Graphic, and Maximalist nail art collections from LS Nails Studio in Negombo. Over 60 portfolio photos.">
   <meta property="og:url" content="https://lsnails.lk/gallery.html">
   <meta property="og:image" content="https://lsnails.lk/images/classic_09.png">
   <meta property="og:image:alt" content="Classic nail art close-up from LS Nails Studio">
@@ -472,7 +474,7 @@
       gap: 0.35rem;
     }
 
-    .footer-brand > a {
+    .footer-brand>a {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
@@ -944,11 +946,6 @@
             </div>
           </div>
           <div class="masonry-item gsap-reveal" data-category="maximalist">
-            <div class="photo-card"><img src="images/maximalist_25.png" loading="lazy" alt="Maximalist nail art" />
-              <div class="overlay"></div>
-            </div>
-          </div>
-          <div class="masonry-item gsap-reveal" data-category="maximalist">
             <div class="photo-card"><img src="images/maximalist_26.png" loading="lazy" alt="Maximalist nail art" />
               <div class="overlay"></div>
             </div>
@@ -1009,15 +1006,20 @@
     </div>
   </section>
   <!-- FOOTER -->
-  <footer class="site-footer bg-[#2C1F10] text-[#F7F3ED]" role="contentinfo" style="background: linear-gradient(135deg, #2C1F10 0%, #1A1208 100%); color: #F7F3ED;">
+  <footer class="site-footer bg-[#2C1F10] text-[#F7F3ED]" role="contentinfo"
+    style="background: linear-gradient(135deg, #2C1F10 0%, #1A1208 100%); color: #F7F3ED;">
     <div class="site-container">
       <div class="footer-inner">
 
         <!-- Brand -->
         <div class="footer-brand">
           <a href="index.html" aria-label="LS Nails Studio home">
-            <img src="images/LOGO.png" alt="LS Nails Studio logo" class="h-6 sm:h-7 w-auto object-contain brightness-0 invert" style="height: 26px; width: auto; max-width: 120px; filter: brightness(0) invert(1);" />
-            <span class="footer-brand-name font-display font-medium text-xs sm:text-[13px] tracking-[0.18em] uppercase text-[#F7F3ED]">Nails Studio</span>
+            <img src="images/LOGO.png" alt="LS Nails Studio logo"
+              class="h-6 sm:h-7 w-auto object-contain brightness-0 invert"
+              style="height: 26px; width: auto; max-width: 120px; filter: brightness(0) invert(1);" />
+            <span
+              class="footer-brand-name font-display font-medium text-xs sm:text-[13px] tracking-[0.18em] uppercase text-[#F7F3ED]">Nails
+              Studio</span>
           </a>
           <p class="footer-tagline">Negombo, Sri Lanka &middot; Est. 2023</p>
         </div>
@@ -1035,13 +1037,16 @@
 
         <!-- Socials -->
         <div class="footer-socials">
-          <a href="https://www.instagram.com/__ls_nails__" target="_blank" rel="noopener noreferrer" aria-label="LS Nails Studio on Instagram">
+          <a href="https://www.instagram.com/__ls_nails__" target="_blank" rel="noopener noreferrer"
+            aria-label="LS Nails Studio on Instagram">
             <i class="ph ph-instagram-logo"></i>
           </a>
-          <a href="https://www.facebook.com/profile.php?id=100091059944803" target="_blank" rel="noopener noreferrer" aria-label="LS Nails Studio on Facebook">
+          <a href="https://www.facebook.com/profile.php?id=100091059944803" target="_blank" rel="noopener noreferrer"
+            aria-label="LS Nails Studio on Facebook">
             <i class="ph ph-facebook-logo"></i>
           </a>
-          <a href="https://www.tiktok.com/@ls_nails__" target="_blank" rel="noopener noreferrer" aria-label="LS Nails Studio on TikTok">
+          <a href="https://www.tiktok.com/@ls_nails__" target="_blank" rel="noopener noreferrer"
+            aria-label="LS Nails Studio on TikTok">
             <i class="ph ph-tiktok-logo"></i>
           </a>
           <a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
@@ -1304,7 +1309,7 @@
 
         lightboxImg.style.transition = 'none';
         if (lightbox.setPointerCapture) {
-          try { lightbox.setPointerCapture(e.pointerId); } catch (_) {}
+          try { lightbox.setPointerCapture(e.pointerId); } catch (_) { }
         }
       });
 
@@ -1343,7 +1348,7 @@
         activePointerId = null;
 
         if (lightbox.releasePointerCapture) {
-          try { lightbox.releasePointerCapture(e.pointerId); } catch (_) {}
+          try { lightbox.releasePointerCapture(e.pointerId); } catch (_) { }
         }
 
         if (!wasDragged) {
