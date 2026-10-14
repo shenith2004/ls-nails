@@ -1,3 +1,5 @@
+import os
+
 content = open(r'd:\Documents\WEBSITES\LS\index.html', encoding='utf-8').read()
 content_gallery = open(r'd:\Documents\WEBSITES\LS\gallery.html', encoding='utf-8').read()
 robots = open(r'd:\Documents\WEBSITES\LS\robots.txt', encoding='utf-8').read()
@@ -47,6 +49,20 @@ checks = {
     'gallery_footer_style_tag_css': '.site-footer {' in content_gallery and 'linear-gradient' in content_gallery,
     'gallery_footer_inline_fallback': 'style="background: linear-gradient(135deg, #2C1F10 0%, #1A1208 100%)' in content_gallery,
     'gallery_footer_logo_constrained': 'max-width: 120px' in content_gallery,
+
+    # Google Search Favicon & Icon Compliance Checks
+    'favicon_ico_exists': os.path.exists(r'd:\Documents\WEBSITES\LS\favicon.ico'),
+    'favicon_48_exists': os.path.exists(r'd:\Documents\WEBSITES\LS\favicon-48x48.png'),
+    'favicon_96_exists': os.path.exists(r'd:\Documents\WEBSITES\LS\favicon-96x96.png'),
+    'favicon_192_exists': os.path.exists(r'd:\Documents\WEBSITES\LS\favicon-192x192.png'),
+    'apple_touch_icon_exists': os.path.exists(r'd:\Documents\WEBSITES\LS\apple-touch-icon.png'),
+    'manifest_exists': os.path.exists(r'd:\Documents\WEBSITES\LS\site.webmanifest'),
+    'index_has_favicon_ico': 'href="/favicon.ico"' in content,
+    'index_has_favicon_48': 'href="/favicon-48x48.png"' in content and 'sizes="48x48"' in content,
+    'index_has_apple_touch_icon': 'rel="apple-touch-icon"' in content,
+    'gallery_has_favicon_ico': 'href="/favicon.ico"' in content_gallery,
+    'gallery_has_favicon_48': 'href="/favicon-48x48.png"' in content_gallery and 'sizes="48x48"' in content_gallery,
+    'gallery_has_apple_touch_icon': 'rel="apple-touch-icon"' in content_gallery,
 }
 
 all_pass = True
