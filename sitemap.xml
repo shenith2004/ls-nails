@@ -1,15 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://lsnails.lk/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://lsnails.lk/images/og-cover.jpg</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/1_web-1400.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/3.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_09.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_11.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_19.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://lsnails.lk/gallery.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://lsnails.lk/images/og-gallery.jpg</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_09.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_01.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_02.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_03.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_04.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_05.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_06.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_07.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_08.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_10.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_11.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_12.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_13.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_15.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_16.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_17.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_18.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/classic_19.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_17.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_01.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_02.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_04.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_06.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_07.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_08.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_09.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_11.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_14.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_16.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_18.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_19.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/graphic_20.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_29.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_01.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_02.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_03.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_04.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_05.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_06.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_07.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_08.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_10.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_11.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_12.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_13.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_16.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_19.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_20.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_22.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_23.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_24.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_26.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_27.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_28.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_30.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_31.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_32.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_33.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_34.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_35.webp</image:loc></image:image>
+    <image:image><image:loc>https://lsnails.lk/images/web/maximalist_36.webp</image:loc></image:image>
   </url>
 </urlset>
