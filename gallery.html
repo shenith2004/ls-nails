@@ -1496,6 +1496,10 @@
             img.width = image.width;
             img.height = image.height;
           }
+          // Same tall shape as the photos above (1080 × 1920). Uploads are cropped to it;
+          // this also lines up any photo saved in another shape.
+          img.style.aspectRatio = '9 / 16';
+          img.style.objectFit = 'cover';
           img.src = image.src;
           const overlay = document.createElement('div');
           overlay.className = 'overlay';

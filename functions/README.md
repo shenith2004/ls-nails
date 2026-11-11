@@ -9,7 +9,8 @@ This guide lives in `functions/` on purpose. Cloudflare Pages runs this folder a
 - `gallery.html` still contains its original photos. They are unchanged and stay in the HTML for SEO.
 - Photos added later are stored in a **Cloudflare D1** database. A short script in `gallery.html` fetches them from `/api/gallery` and puts them at the **top of their style's grid, newest first**, using the same markup. The counts, filters and lightbox all include them.
 - If the database isn't connected or the API fails, the gallery simply shows its built-in photos and nothing breaks.
-- **`/admin/`** is a password-protected page for uploading and deleting photos, and it works on a phone. Photos are resized in the browser to at most 1080 × 1920 and saved as WebP (or JPEG on browsers without WebP support). Re-encoding also strips camera metadata such as GPS location.
+- **`/admin/`** is a password-protected page for uploading and deleting photos, and it works on a phone. There's no description to type: each photo's alt text comes from its style, e.g. "Graphic nail art by LS Nails Studio, Negombo".
+- Every photo is cropped in the browser to the gallery's tall 9:16 shape and sized 1080 × 1920, like the existing photos. Drag the preview to choose which part shows. Photos are saved as WebP (or JPEG on browsers without WebP support), which also strips camera metadata such as GPS location. A photo saved in another shape is still shown at 9:16 in the grid.
 
 ## One-time setup (Cloudflare dashboard)
 
@@ -37,7 +38,7 @@ Steps 2 and 3 apply to **Production**. For preview deployments (branches other t
 
 ## The database
 
-There is one table, `gallery_images`, with these columns: `id`, `category` (classic / graphic / maximalist), `alt`, `width`, `height`, `mime`, `data` (the image, base64-encoded) and `created_at` (milliseconds).
+There is one table, `gallery_images`, with these columns: `id`, `category` (classic / graphic / maximalist), `alt` (set from the style), `width`, `height`, `mime`, `data` (the image, base64-encoded) and `created_at` (milliseconds).
 
 The image is stored as base64 text because reading it back that way stays well inside the free plan's 10 ms CPU limit per request. D1 allows up to 2 MB per row, so uploads are capped at 1 MB; after resizing, photos are typically 50–200 KB.
 
@@ -55,7 +56,6 @@ Cloudflare's free plan currently includes 100,000 function requests a day. The s
 
 - Every `/api/admin/*` request needs `Authorization: Bearer <password>`; a wrong password gets a 401. While `ADMIN_PASSWORD` is missing or shorter than 12 characters, the admin is switched off.
 - The server checks each upload's bytes, not its file name. Only JPEG, PNG and WebP are accepted, so SVG and anything else is rejected, and photos are served with `X-Content-Type-Options: nosniff`.
-- Descriptions are inserted as plain text, never as HTML.
 - For an optional extra lock, put `/admin/*` and `/api/admin/*` behind **Cloudflare Access** (Zero Trust) so only your email address can reach them.
 
 ## Testing locally
@@ -69,5 +69,5 @@ Then open `http://localhost:8788/admin/`. Local data is kept in `.wrangler/`. If
 ## Good to know
 
 - Added photos appear through JavaScript, so they aren't in `sitemap.xml`. Google still sees them when it renders the page.
-- To change a description or style, delete the photo and upload it again.
+- To change a photo's style or crop, delete it and upload it again.
 - After a delete, a Cloudflare data centre may keep a cached copy for a while. Only someone with the exact random URL can reach it; the gallery stops showing the photo immediately.

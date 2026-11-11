@@ -4,7 +4,13 @@
  * This file is not a route: Pages only turns files that export onRequest* handlers into URLs.
  */
 
-export const CATEGORIES = ['classic', 'graphic', 'maximalist'];
+// The gallery's styles and the description (alt text) every photo added to each one gets.
+export const STYLE_ALT = {
+  classic: 'Classic nail design by LS Nails Studio, Negombo',
+  graphic: 'Graphic nail art by LS Nails Studio, Negombo',
+  maximalist: 'Maximalist nail art by LS Nails Studio, Negombo',
+};
+export const CATEGORIES = Object.keys(STYLE_ALT);
 
 // D1 allows up to 2 MB per row. Photos are stored base64-encoded (a third larger), so the file itself must stay under 1 MiB.
 export const MAX_IMAGE_BYTES = 1024 * 1024;

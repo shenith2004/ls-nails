@@ -199,7 +199,6 @@
       padding: 0;
     }
 
-    input[type="text"],
     input[type="password"] {
       width: 100%;
       padding: 13px 15px;
@@ -211,7 +210,6 @@
       transition: border-color .2s, box-shadow .2s;
     }
 
-    input[type="text"]:focus,
     input[type="password"]:focus {
       outline: none;
       border-color: var(--accent);
@@ -271,11 +269,46 @@
       color: var(--ink-soft);
     }
 
-    .drop img {
+    /* Crop preview: the same 9:16 shape as the gallery's photos */
+    .crop-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 16px 22px;
+    }
+
+    .crop {
+      position: relative;
+      flex: none;
+      width: min(62vw, 260px);
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 16px;
+      background: var(--surface);
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .crop:active {
+      cursor: grabbing;
+    }
+
+    .crop img {
       display: block;
-      max-width: 100%;
-      max-height: 320px;
-      border-radius: 12px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .crop-side {
+      flex: 1 1 180px;
+      display: grid;
+      gap: 12px;
+      justify-items: start;
     }
 
     /* Style choice: same pills as the gallery's filter tabs */
@@ -353,6 +386,7 @@
 
     .btn:focus-visible,
     .link-btn:focus-visible,
+    .crop:focus-visible,
     .thumb-delete:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
@@ -393,47 +427,38 @@
       margin: 0;
       padding: 0;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
     }
 
     @media (min-width: 640px) {
       .thumbs {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(5, minmax(0, 1fr));
       }
     }
 
     .thumb {
       display: grid;
       align-content: start;
-      gap: 6px;
+      gap: 4px;
     }
 
     .thumb img {
       display: block;
       width: 100%;
       height: auto;
-      aspect-ratio: 3 / 4;
+      aspect-ratio: 9 / 16;
       object-fit: cover;
-      border-radius: 14px;
+      border-radius: 12px;
       background: var(--surface);
-    }
-
-    .thumb-alt {
-      margin: 2px 0 0;
-      font-size: 13px;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
 
     .thumb-meta {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 0 8px;
       font-size: 12px;
       color: var(--ink-soft);
     }
@@ -442,7 +467,7 @@
       appearance: none;
       border: 0;
       background: none;
-      padding: 4px 0;
+      padding: 6px 0;
       font: inherit;
       font-size: 12px;
       font-weight: 500;
@@ -500,10 +525,20 @@
         <p class="muted">It goes to the top of its style on the gallery page as soon as it's uploaded.</p>
         <form id="upload-form">
           <label class="drop" id="drop">
-            <input id="file" type="file" accept="image/jpeg,image/png,image/webp" required>
-            <img id="preview" alt="" hidden>
-            <span class="drop-text" id="drop-text">Choose a photo<small>JPG, PNG or WebP. Resized for the web automatically.</small></span>
+            <input id="file" type="file" accept="image/jpeg,image/png,image/webp">
+            <span class="drop-text">Choose a photo<small>JPG, PNG or WebP. Sized to match the other gallery photos automatically.</small></span>
           </label>
+
+          <div class="crop-wrap" id="crop-wrap" hidden>
+            <div class="crop" id="crop" tabindex="0" role="group"
+              aria-label="Photo preview. Drag it, or use the arrow keys, to choose which part shows.">
+              <img id="crop-img" alt="" draggable="false">
+            </div>
+            <div class="crop-side">
+              <p class="hint">This is how it will look in the gallery: the same shape and size as the other photos. Drag the photo to choose which part shows.</p>
+              <button class="link-btn" id="change-photo" type="button">Choose another photo</button>
+            </div>
+          </div>
           <p class="msg" id="file-info" aria-live="polite"></p>
 
           <fieldset>
@@ -514,13 +549,6 @@
               <label class="pill"><input type="radio" name="category" value="maximalist"><span>Maximalist</span></label>
             </div>
           </fieldset>
-
-          <div class="field">
-            <label class="label" for="alt">Description</label>
-            <input id="alt" type="text" minlength="3" maxlength="200" required
-              placeholder="e.g. Nude almond nails with gold foil French tips">
-            <p class="hint">Describe the colour, shape and details. Google and screen readers use this text.</p>
-          </div>
 
           <button class="btn" id="upload-btn" type="submit">Add to gallery</button>
           <p class="msg" id="upload-msg" role="status"></p>
@@ -541,9 +569,9 @@
   <script>
     (() => {
       const STYLES = { classic: 'Classic', graphic: 'Graphic', maximalist: 'Maximalist' };
-      // Same size as the gallery's existing photos (1080 × 1920 portrait).
-      const MAX_LONG_SIDE = 1920;
-      const MAX_SHORT_SIDE = 1080;
+      // Every photo gets the gallery's shape and size: 9:16, 1080 × 1920.
+      const RATIO = 9 / 16;
+      const OUT_WIDTH = 1080;
       const MAX_BYTES = 1024 * 1024; // the server's limit
       const STORAGE_KEY = 'ls-gallery-admin';
 
@@ -558,10 +586,11 @@
       const uploadForm = $('upload-form');
       const drop = $('drop');
       const fileInput = $('file');
-      const preview = $('preview');
-      const dropText = $('drop-text');
+      const cropWrap = $('crop-wrap');
+      const crop = $('crop');
+      const cropImg = $('crop-img');
+      const changePhoto = $('change-photo');
       const fileInfo = $('file-info');
-      const altInput = $('alt');
       const uploadBtn = $('upload-btn');
       const uploadMsg = $('upload-msg');
       const list = $('list');
@@ -571,8 +600,9 @@
       let password = '';
       try { password = sessionStorage.getItem(STORAGE_KEY) || ''; } catch (_) { }
       let images = [];
-      let prepared = null; // { blob, width, height } ready to upload
-      let prepareToken = 0;
+      let photo = null; // the chosen photo: { img, url, width, height }
+      let focus = { x: 50, y: 50 }; // which part shows, as CSS object-position percentages
+      let pickToken = 0;
 
       // ── Server ──
       class ApiError extends Error {
@@ -663,95 +693,54 @@
 
       logoutBtn.addEventListener('click', () => signOut());
 
-      // ── Photo preparation: resize and re-encode in the browser ──
-      // Re-encoding also strips camera metadata such as GPS location.
-      function drawTo(source, width, height) {
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#fff'; // flatten any transparency
-        ctx.fillRect(0, 0, width, height);
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(source, 0, 0, width, height);
-        return canvas;
+      // ── Choosing a photo ──
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+      function showFocus() {
+        cropImg.style.objectPosition = `${focus.x}% ${focus.y}%`;
       }
 
-      const toBlob = (canvas, type, quality) => new Promise(resolve => canvas.toBlob(resolve, type, quality));
-
-      async function prepareImage(file) {
-        const url = URL.createObjectURL(file);
-        try {
-          const img = new Image();
-          img.src = url;
-          try {
-            await img.decode();
-          } catch (_) {
-            throw new Error('This file can\'t be opened as a photo here. Use a JPG, PNG or WebP image.');
-          }
-
-          const w0 = img.naturalWidth;
-          const h0 = img.naturalHeight;
-          const scale = Math.min(1, MAX_LONG_SIDE / Math.max(w0, h0), MAX_SHORT_SIDE / Math.min(w0, h0));
-          const width = Math.max(1, Math.round(w0 * scale));
-          const height = Math.max(1, Math.round(h0 * scale));
-
-          // Halve in steps first: one big jump down from a phone photo looks jagged.
-          let source = img;
-          let sw = w0;
-          let sh = h0;
-          while (sw > width * 2 && sh > height * 2) {
-            sw = Math.round(sw / 2);
-            sh = Math.round(sh / 2);
-            source = drawTo(source, sw, sh);
-          }
-          const canvas = drawTo(source, width, height);
-
-          for (const quality of [0.82, 0.72, 0.62]) {
-            let blob = await toBlob(canvas, 'image/webp', quality);
-            // Browsers that can't write WebP hand back a PNG instead; use JPEG there.
-            if (!blob || blob.type !== 'image/webp') blob = await toBlob(canvas, 'image/jpeg', quality);
-            if (blob && blob.size <= MAX_BYTES) return { blob, width, height };
-          }
-          throw new Error('This photo is still over 1 MB after compressing. Try a smaller photo.');
-        } finally {
-          URL.revokeObjectURL(url);
-        }
-      }
-
-      function clearPreview() {
-        prepared = null;
-        if (preview.src) URL.revokeObjectURL(preview.src);
-        preview.removeAttribute('src');
-        preview.hidden = true;
-        dropText.hidden = false;
-        say(fileInfo, '');
+      function releasePhoto() {
+        if (photo) URL.revokeObjectURL(photo.url);
+        photo = null;
+        cropImg.removeAttribute('src');
+        cropWrap.hidden = true;
+        drop.hidden = false;
       }
 
       fileInput.addEventListener('change', async () => {
-        const token = ++prepareToken;
-        clearPreview();
-        say(uploadMsg, '');
+        const token = ++pickToken;
         const file = fileInput.files[0];
+        releasePhoto();
+        say(fileInfo, '');
+        say(uploadMsg, '');
         if (!file) return;
 
-        say(fileInfo, 'Preparing photo…');
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.src = url;
         try {
-          const result = await prepareImage(file);
-          if (token !== prepareToken) return; // a newer photo was chosen meanwhile
-          prepared = result;
-          preview.src = URL.createObjectURL(result.blob);
-          preview.hidden = false;
-          dropText.hidden = true;
-          const kb = Math.round(result.blob.size / 1024);
-          const format = result.blob.type.split('/')[1].toUpperCase();
-          say(fileInfo, `Ready: ${result.width} × ${result.height} px, ${kb} KB ${format}`);
-        } catch (err) {
-          if (token !== prepareToken) return;
+          await img.decode();
+        } catch (_) {
+          URL.revokeObjectURL(url);
+          if (token !== pickToken) return;
           fileInput.value = '';
-          say(fileInfo, err.message, 'error');
+          say(fileInfo, 'This file can\'t be opened as a photo here. Use a JPG, PNG or WebP image.', 'error');
+          return;
         }
+        if (token !== pickToken) { // a newer photo was chosen meanwhile
+          URL.revokeObjectURL(url);
+          return;
+        }
+        photo = { img, url, width: img.naturalWidth, height: img.naturalHeight };
+        focus = { x: 50, y: 50 };
+        cropImg.src = url;
+        showFocus();
+        drop.hidden = true;
+        cropWrap.hidden = false;
       });
+
+      changePhoto.addEventListener('click', () => fileInput.click());
 
       // Desktop drag and drop onto the picker
       ['dragenter', 'dragover'].forEach(type => drop.addEventListener(type, e => {
@@ -766,31 +755,115 @@
         fileInput.dispatchEvent(new Event('change'));
       });
 
+      // ── Choosing which part shows: drag the photo inside the frame ──
+      crop.addEventListener('pointerdown', e => {
+        if (!photo || e.button !== 0) return;
+        e.preventDefault();
+        const box = crop.getBoundingClientRect();
+        const scale = Math.max(box.width / photo.width, box.height / photo.height);
+        // How much of the photo is hidden beyond the frame, in screen pixels.
+        const spareX = photo.width * scale - box.width;
+        const spareY = photo.height * scale - box.height;
+        const start = { x: e.clientX, y: e.clientY, focusX: focus.x, focusY: focus.y };
+        crop.setPointerCapture(e.pointerId);
+
+        const move = ev => {
+          if (spareX > 0.5) focus.x = clamp(start.focusX - (ev.clientX - start.x) / spareX * 100, 0, 100);
+          if (spareY > 0.5) focus.y = clamp(start.focusY - (ev.clientY - start.y) / spareY * 100, 0, 100);
+          showFocus();
+        };
+        const end = () => {
+          crop.removeEventListener('pointermove', move);
+          crop.removeEventListener('pointerup', end);
+          crop.removeEventListener('pointercancel', end);
+        };
+        crop.addEventListener('pointermove', move);
+        crop.addEventListener('pointerup', end);
+        crop.addEventListener('pointercancel', end);
+      });
+
+      // Arrow keys do the same for keyboard users.
+      crop.addEventListener('keydown', e => {
+        const step = { ArrowLeft: [-5, 0], ArrowRight: [5, 0], ArrowUp: [0, -5], ArrowDown: [0, 5] }[e.key];
+        if (!step || !photo) return;
+        e.preventDefault();
+        focus = { x: clamp(focus.x + step[0], 0, 100), y: clamp(focus.y + step[1], 0, 100) };
+        showFocus();
+      });
+
+      // ── Making the final photo ──
+      function paint(width, height, draw) {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#fff'; // flatten any transparency
+        ctx.fillRect(0, 0, width, height);
+        ctx.imageSmoothingQuality = 'high';
+        draw(ctx);
+        return canvas;
+      }
+
+      const toBlob = (canvas, type, quality) => new Promise(resolve => canvas.toBlob(resolve, type, quality));
+
+      // Crops the chosen 9:16 part, sizes it like the gallery's photos and re-encodes it.
+      // Re-encoding also strips camera metadata such as GPS location.
+      async function renderPhoto() {
+        const { img, width: w0, height: h0 } = photo;
+        // The largest 9:16 part of the photo, where it was dragged to (same maths as the preview).
+        const sw = Math.min(w0, h0 * RATIO);
+        const sh = sw / RATIO;
+        const sx = (w0 - sw) * focus.x / 100;
+        const sy = (h0 - sh) * focus.y / 100;
+
+        // 1080 wide like the others; smaller photos aren't enlarged. Halve in steps first:
+        // one big jump down from a phone photo looks jagged.
+        const width = Math.min(OUT_WIDTH, Math.round(sw));
+        const widths = [];
+        for (let w = sw; w > width * 2; w /= 2) widths.push(w / 2);
+        widths.push(width);
+
+        let canvas = null;
+        for (const w of widths) {
+          const dw = Math.round(w);
+          const dh = Math.round(w / RATIO);
+          const from = canvas;
+          canvas = paint(dw, dh, ctx => (from
+            ? ctx.drawImage(from, 0, 0, dw, dh)
+            : ctx.drawImage(img, sx, sy, sw, sh, 0, 0, dw, dh)));
+        }
+
+        for (const quality of [0.82, 0.72, 0.62]) {
+          let blob = await toBlob(canvas, 'image/webp', quality);
+          // Browsers that can't write WebP hand back a PNG instead; use JPEG there.
+          if (!blob || blob.type !== 'image/webp') blob = await toBlob(canvas, 'image/jpeg', quality);
+          if (blob && blob.size <= MAX_BYTES) return { blob, width: canvas.width, height: canvas.height };
+        }
+        throw new Error('This photo is still over 1 MB after compressing. Try a smaller photo.');
+      }
+
       // ── Upload ──
       uploadForm.addEventListener('submit', async e => {
         e.preventDefault();
-        if (!prepared) {
-          say(uploadMsg, 'Choose a photo first and wait until it says "Ready".', 'error');
+        if (!photo) {
+          say(uploadMsg, 'Choose a photo first.', 'error');
           return;
         }
         const category = uploadForm.elements.category.value;
-        const extension = prepared.blob.type === 'image/webp' ? 'webp' : 'jpg';
-        const body = new FormData();
-        body.append('file', prepared.blob, `photo.${extension}`);
-        body.append('category', category);
-        body.append('alt', altInput.value.replace(/\s+/g, ' ').trim());
-        body.append('width', String(prepared.width));
-        body.append('height', String(prepared.height));
-
         say(uploadMsg, '');
         setBusy(uploadBtn, 'Uploading…');
         try {
+          const result = await renderPhoto();
+          const body = new FormData();
+          body.append('file', result.blob, `photo.${result.blob.type === 'image/webp' ? 'webp' : 'jpg'}`);
+          body.append('category', category);
+          body.append('width', String(result.width));
+          body.append('height', String(result.height));
           const { image } = await api('/api/admin/images', { method: 'POST', body });
           images.unshift(image);
           renderList();
+          releasePhoto();
           fileInput.value = '';
-          clearPreview();
-          altInput.value = '';
           say(uploadMsg, `Added to ${STYLES[category]}. It's on the gallery page now.`, 'ok');
         } catch (err) {
           if (err.status === 401) signOut('The password has changed. Sign in again.');
@@ -819,6 +892,7 @@
           title.textContent = `${label} · ${group.length}`;
           const grid = document.createElement('ul');
           grid.className = 'thumbs';
+          grid.dataset.style = key;
           group.forEach(image => grid.append(renderItem(image)));
           list.append(title, grid);
         });
@@ -835,11 +909,6 @@
         img.height = image.height;
         img.src = image.src;
 
-        const alt = document.createElement('p');
-        alt.className = 'thumb-alt';
-        alt.textContent = image.alt;
-        alt.title = image.alt;
-
         const meta = document.createElement('div');
         meta.className = 'thumb-meta';
         const date = document.createElement('span');
@@ -848,16 +917,15 @@
         remove.type = 'button';
         remove.className = 'thumb-delete';
         remove.textContent = 'Delete';
-        remove.setAttribute('aria-label', `Delete: ${image.alt}`);
         remove.addEventListener('click', () => deleteImage(image, remove));
         meta.append(date, remove);
 
-        item.append(img, alt, meta);
+        item.append(img, meta);
         return item;
       }
 
       async function deleteImage(image, button) {
-        if (!confirm(`Remove this photo from the gallery?\n\n"${image.alt}"`)) return;
+        if (!confirm('Remove this photo from the gallery?')) return;
         say(listMsg, '');
         setBusy(button, 'Deleting…');
         try {

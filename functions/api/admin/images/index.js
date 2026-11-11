@@ -1,11 +1,11 @@
-import { CATEGORIES, MAX_IMAGE_BYTES, insertImage, json, listImages, sniffImageType } from '../../../_lib/gallery.js';
+import { CATEGORIES, MAX_IMAGE_BYTES, STYLE_ALT, insertImage, json, listImages, sniffImageType } from '../../../_lib/gallery.js';
 
 // GET /api/admin/images: the same list the gallery uses (the admin page also uses it to check the password).
 export async function onRequestGet({ env }) {
   return json({ images: await listImages(env.DB) });
 }
 
-// POST /api/admin/images: multipart form with file, category, alt, width and height.
+// POST /api/admin/images: multipart form with file, category, width and height.
 export async function onRequestPost({ request, env }) {
   let form;
   try {
@@ -17,11 +17,6 @@ export async function onRequestPost({ request, env }) {
   const category = String(form.get('category') || '');
   if (!CATEGORIES.includes(category)) {
     return json({ error: 'Choose a style: Classic, Graphic or Maximalist.' }, 400);
-  }
-
-  const alt = String(form.get('alt') || '').replace(/\s+/g, ' ').trim();
-  if (alt.length < 3 || alt.length > 200) {
-    return json({ error: 'Add a short description of the nails (3 to 200 characters).' }, 400);
   }
 
   const width = Number(form.get('width'));
@@ -45,6 +40,6 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'Only JPEG, PNG or WebP photos can be uploaded.' }, 415);
   }
 
-  const image = await insertImage(env.DB, { category, alt, width, height, mime, bytes });
+  const image = await insertImage(env.DB, { category, alt: STYLE_ALT[category], width, height, mime, bytes });
   return json({ image }, 201);
 }
