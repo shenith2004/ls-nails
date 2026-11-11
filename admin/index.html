@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Gallery Admin | LS Nails Studio</title>
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <meta name="theme-color" content="#F7F3ED">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F7F3ED;
+      --panel: #FBF8F3;
+      --surface: #EDE3D6;
+      --ink: #1E140A;
+      --ink-soft: rgba(30, 20, 10, .6);
+      --line: rgba(30, 20, 10, .12);
+      --accent: #B8926A;
+      --accent-dark: #9B7850;
+      --danger: #9B2C2C;
+      --ok: #2F6B3A;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .shell {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 20px 16px 64px;
+    }
+
+    /* Header */
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 10px 10px 18px;
+      background: rgba(251, 248, 243, .9);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand img {
+      height: 22px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+    .brand span,
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .top nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Phones: the logo alone leaves room for both buttons */
+    @media (max-width: 479px) {
+      .brand span {
+        display: none;
+      }
+    }
+
+    .link-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: 100px;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .25s, border-color .25s;
+    }
+
+    .link-btn:hover {
+      background: rgba(237, 227, 214, .6);
+      border-color: rgba(30, 20, 10, .25);
+    }
+
+    /* Panels */
+    .panel {
+      margin-top: 20px;
+      padding: 24px 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+
+    @media (min-width: 640px) {
+      .panel {
+        padding: 32px;
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      margin: 0 0 8px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 6px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .muted {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    /* Forms */
+    form {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .label,
+    legend {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 0;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 13px 15px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid rgba(30, 20, 10, .16);
+      border-radius: 14px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(184, 146, 106, .25);
+    }
+
+    .hint {
+      margin: 0;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    /* Photo picker */
+    .drop {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 200px;
+      padding: 16px;
+      text-align: center;
+      background: #fff;
+      border: 1.5px dashed rgba(30, 20, 10, .22);
+      border-radius: 18px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+
+    .drop:hover,
+    .drop.is-over {
+      border-color: var(--accent);
+      background: #FFFCF8;
+    }
+
+    .drop:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(184, 146, 106, .25);
+    }
+
+    .drop input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .drop-text {
+      display: grid;
+      gap: 4px;
+      font-weight: 500;
+    }
+
+    .drop-text small {
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .drop img {
+      display: block;
+      max-width: 100%;
+      max-height: 320px;
+      border-radius: 12px;
+    }
+
+    /* Style choice: same pills as the gallery's filter tabs */
+    fieldset {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pill span {
+      display: inline-flex;
+      padding: 9px 18px;
+      border-radius: 100px;
+      border: 1px solid rgba(30, 20, 10, .14);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(30, 20, 10, .55);
+      cursor: pointer;
+      transition: all .25s;
+    }
+
+    .pill span:hover {
+      color: var(--ink);
+      border-color: rgba(30, 20, 10, .28);
+    }
+
+    .pill input:checked+span {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--bg);
+    }
+
+    .pill input:focus-visible+span {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Buttons & messages */
+    .btn {
+      justify-self: start;
+      appearance: none;
+      border: 0;
+      background: var(--ink);
+      color: var(--bg);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: 14px 26px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background .25s, opacity .25s;
+    }
+
+    .btn:hover {
+      background: #2C1F10;
+    }
+
+    .btn:focus-visible,
+    .link-btn:focus-visible,
+    .thumb-delete:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .btn:disabled,
+    .thumb-delete:disabled {
+      opacity: .5;
+      cursor: progress;
+    }
+
+    .msg {
+      margin: 0;
+      font-size: 14px;
+      min-height: 1.5em;
+    }
+
+    .msg[data-tone="error"] {
+      color: var(--danger);
+    }
+
+    .msg[data-tone="ok"] {
+      color: var(--ok);
+    }
+
+    /* Added photos */
+    .group-title {
+      margin: 26px 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .thumbs {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .thumbs {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .thumb {
+      display: grid;
+      align-content: start;
+      gap: 6px;
+    }
+
+    .thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .thumb-alt {
+      margin: 2px 0 0;
+      font-size: 13px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .thumb-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .thumb-delete {
+      appearance: none;
+      border: 0;
+      background: none;
+      padding: 4px 0;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--danger);
+      cursor: pointer;
+    }
+
+    .thumb-delete:hover {
+      text-decoration: underline;
+    }
+
+    .empty {
+      margin-top: 20px;
+      padding: 28px 16px;
+      text-align: center;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="shell">
+    <header class="top">
+      <a class="brand" href="/">
+        <img src="/images/LOGO.png" alt="LS Nails Studio" width="493" height="427">
+        <span>Gallery admin</span>
+      </a>
+      <nav>
+        <a class="link-btn" href="/gallery.html" target="_blank" rel="noopener">View gallery</a>
+        <button class="link-btn" id="logout" type="button" hidden>Log out</button>
+      </nav>
+    </header>
+
+    <!-- Sign in -->
+    <section class="panel" id="login" hidden>
+      <p class="eyebrow">Private</p>
+      <h1>Sign in</h1>
+      <p class="muted">Enter the admin password to add or remove gallery photos.</p>
+      <form id="login-form">
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <input id="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn" id="login-btn" type="submit">Unlock</button>
+        <p class="msg" id="login-msg" role="alert"></p>
+      </form>
+    </section>
+
+    <div id="app" hidden>
+      <!-- Upload -->
+      <section class="panel">
+        <p class="eyebrow">Gallery</p>
+        <h1>Add a photo</h1>
+        <p class="muted">It goes to the top of its style on the gallery page as soon as it's uploaded.</p>
+        <form id="upload-form">
+          <label class="drop" id="drop">
+            <input id="file" type="file" accept="image/jpeg,image/png,image/webp" required>
+            <img id="preview" alt="" hidden>
+            <span class="drop-text" id="drop-text">Choose a photo<small>JPG, PNG or WebP. Resized for the web automatically.</small></span>
+          </label>
+          <p class="msg" id="file-info" aria-live="polite"></p>
+
+          <fieldset>
+            <legend>Style</legend>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="category" value="classic" checked><span>Classic</span></label>
+              <label class="pill"><input type="radio" name="category" value="graphic"><span>Graphic</span></label>
+              <label class="pill"><input type="radio" name="category" value="maximalist"><span>Maximalist</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label class="label" for="alt">Description</label>
+            <input id="alt" type="text" minlength="3" maxlength="200" required
+              placeholder="e.g. Nude almond nails with gold foil French tips">
+            <p class="hint">Describe the colour, shape and details. Google and screen readers use this text.</p>
+          </div>
+
+          <button class="btn" id="upload-btn" type="submit">Add to gallery</button>
+          <p class="msg" id="upload-msg" role="status"></p>
+        </form>
+      </section>
+
+      <!-- Added photos -->
+      <section class="panel">
+        <p class="eyebrow">Added here</p>
+        <h2>Your uploads <span id="count"></span></h2>
+        <p class="muted">Newest first. The original photos built into the gallery page aren't listed here.</p>
+        <p class="msg" id="list-msg" role="status"></p>
+        <div id="list"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const STYLES = { classic: 'Classic', graphic: 'Graphic', maximalist: 'Maximalist' };
+      // Same size as the gallery's existing photos (1080 × 1920 portrait).
+      const MAX_LONG_SIDE = 1920;
+      const MAX_SHORT_SIDE = 1080;
+      const MAX_BYTES = 1024 * 1024; // the server's limit
+      const STORAGE_KEY = 'ls-gallery-admin';
+
+      const $ = id => document.getElementById(id);
+      const loginPanel = $('login');
+      const app = $('app');
+      const logoutBtn = $('logout');
+      const loginForm = $('login-form');
+      const passwordInput = $('password');
+      const loginBtn = $('login-btn');
+      const loginMsg = $('login-msg');
+      const uploadForm = $('upload-form');
+      const drop = $('drop');
+      const fileInput = $('file');
+      const preview = $('preview');
+      const dropText = $('drop-text');
+      const fileInfo = $('file-info');
+      const altInput = $('alt');
+      const uploadBtn = $('upload-btn');
+      const uploadMsg = $('upload-msg');
+      const list = $('list');
+      const listMsg = $('list-msg');
+      const countEl = $('count');
+
+      let password = '';
+      try { password = sessionStorage.getItem(STORAGE_KEY) || ''; } catch (_) { }
+      let images = [];
+      let prepared = null; // { blob, width, height } ready to upload
+      let prepareToken = 0;
+
+      // ── Server ──
+      class ApiError extends Error {
+        constructor(message, status) {
+          super(message);
+          this.status = status;
+        }
+      }
+
+      async function api(path, options = {}) {
+        let res;
+        try {
+          res = await fetch(path, {
+            ...options,
+            // URI-encoded so any character in the password is safe in a header.
+            headers: { Authorization: `Bearer ${encodeURIComponent(password)}` },
+          });
+        } catch (_) {
+          throw new ApiError('Could not reach the server. Check your connection and try again.', 0);
+        }
+        const isJson = (res.headers.get('content-type') || '').includes('application/json');
+        const data = isJson ? await res.json().catch(() => null) : null;
+        if (!data) throw new ApiError('The gallery API is not available on this site yet.', res.status);
+        if (!res.ok) throw new ApiError(data.error || `Request failed (${res.status}).`, res.status);
+        return data;
+      }
+
+      async function loadImages() {
+        images = (await api('/api/admin/images')).images;
+        renderList();
+      }
+
+      // ── Screens ──
+      function showLogin(message = '') {
+        app.hidden = true;
+        logoutBtn.hidden = true;
+        loginPanel.hidden = false;
+        say(loginMsg, message, 'error');
+        passwordInput.focus();
+      }
+
+      function showApp() {
+        loginPanel.hidden = true;
+        logoutBtn.hidden = false;
+        app.hidden = false;
+      }
+
+      function signOut(message = '') {
+        password = '';
+        try { sessionStorage.removeItem(STORAGE_KEY); } catch (_) { }
+        showLogin(message);
+      }
+
+      function say(node, text, tone = '') {
+        node.textContent = text;
+        node.dataset.tone = tone;
+      }
+
+      function setBusy(button, busyLabel) {
+        if (busyLabel) {
+          button.dataset.label = button.textContent;
+          button.textContent = busyLabel;
+          button.disabled = true;
+        } else {
+          button.textContent = button.dataset.label || button.textContent;
+          button.disabled = false;
+        }
+      }
+
+      // ── Sign in ──
+      loginForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        password = passwordInput.value.trim();
+        say(loginMsg, '');
+        setBusy(loginBtn, 'Checking…');
+        try {
+          await loadImages();
+          try { sessionStorage.setItem(STORAGE_KEY, password); } catch (_) { }
+          passwordInput.value = '';
+          showApp();
+        } catch (err) {
+          password = '';
+          say(loginMsg, err.message, 'error');
+        } finally {
+          setBusy(loginBtn);
+        }
+      });
+
+      logoutBtn.addEventListener('click', () => signOut());
+
+      // ── Photo preparation: resize and re-encode in the browser ──
+      // Re-encoding also strips camera metadata such as GPS location.
+      function drawTo(source, width, height) {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#fff'; // flatten any transparency
+        ctx.fillRect(0, 0, width, height);
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(source, 0, 0, width, height);
+        return canvas;
+      }
+
+      const toBlob = (canvas, type, quality) => new Promise(resolve => canvas.toBlob(resolve, type, quality));
+
+      async function prepareImage(file) {
+        const url = URL.createObjectURL(file);
+        try {
+          const img = new Image();
+          img.src = url;
+          try {
+            await img.decode();
+          } catch (_) {
+            throw new Error('This file can\'t be opened as a photo here. Use a JPG, PNG or WebP image.');
+          }
+
+          const w0 = img.naturalWidth;
+          const h0 = img.naturalHeight;
+          const scale = Math.min(1, MAX_LONG_SIDE / Math.max(w0, h0), MAX_SHORT_SIDE / Math.min(w0, h0));
+          const width = Math.max(1, Math.round(w0 * scale));
+          const height = Math.max(1, Math.round(h0 * scale));
+
+          // Halve in steps first: one big jump down from a phone photo looks jagged.
+          let source = img;
+          let sw = w0;
+          let sh = h0;
+          while (sw > width * 2 && sh > height * 2) {
+            sw = Math.round(sw / 2);
+            sh = Math.round(sh / 2);
+            source = drawTo(source, sw, sh);
+          }
+          const canvas = drawTo(source, width, height);
+
+          for (const quality of [0.82, 0.72, 0.62]) {
+            let blob = await toBlob(canvas, 'image/webp', quality);
+            // Browsers that can't write WebP hand back a PNG instead; use JPEG there.
+            if (!blob || blob.type !== 'image/webp') blob = await toBlob(canvas, 'image/jpeg', quality);
+            if (blob && blob.size <= MAX_BYTES) return { blob, width, height };
+          }
+          throw new Error('This photo is still over 1 MB after compressing. Try a smaller photo.');
+        } finally {
+          URL.revokeObjectURL(url);
+        }
+      }
+
+      function clearPreview() {
+        prepared = null;
+        if (preview.src) URL.revokeObjectURL(preview.src);
+        preview.removeAttribute('src');
+        preview.hidden = true;
+        dropText.hidden = false;
+        say(fileInfo, '');
+      }
+
+      fileInput.addEventListener('change', async () => {
+        const token = ++prepareToken;
+        clearPreview();
+        say(uploadMsg, '');
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        say(fileInfo, 'Preparing photo…');
+        try {
+          const result = await prepareImage(file);
+          if (token !== prepareToken) return; // a newer photo was chosen meanwhile
+          prepared = result;
+          preview.src = URL.createObjectURL(result.blob);
+          preview.hidden = false;
+          dropText.hidden = true;
+          const kb = Math.round(result.blob.size / 1024);
+          const format = result.blob.type.split('/')[1].toUpperCase();
+          say(fileInfo, `Ready: ${result.width} × ${result.height} px, ${kb} KB ${format}`);
+        } catch (err) {
+          if (token !== prepareToken) return;
+          fileInput.value = '';
+          say(fileInfo, err.message, 'error');
+        }
+      });
+
+      // Desktop drag and drop onto the picker
+      ['dragenter', 'dragover'].forEach(type => drop.addEventListener(type, e => {
+        e.preventDefault();
+        drop.classList.add('is-over');
+      }));
+      ['dragleave', 'drop'].forEach(type => drop.addEventListener(type, () => drop.classList.remove('is-over')));
+      drop.addEventListener('drop', e => {
+        e.preventDefault();
+        if (!e.dataTransfer || !e.dataTransfer.files.length) return;
+        fileInput.files = e.dataTransfer.files;
+        fileInput.dispatchEvent(new Event('change'));
+      });
+
+      // ── Upload ──
+      uploadForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        if (!prepared) {
+          say(uploadMsg, 'Choose a photo first and wait until it says "Ready".', 'error');
+          return;
+        }
+        const category = uploadForm.elements.category.value;
+        const extension = prepared.blob.type === 'image/webp' ? 'webp' : 'jpg';
+        const body = new FormData();
+        body.append('file', prepared.blob, `photo.${extension}`);
+        body.append('category', category);
+        body.append('alt', altInput.value.replace(/\s+/g, ' ').trim());
+        body.append('width', String(prepared.width));
+        body.append('height', String(prepared.height));
+
+        say(uploadMsg, '');
+        setBusy(uploadBtn, 'Uploading…');
+        try {
+          const { image } = await api('/api/admin/images', { method: 'POST', body });
+          images.unshift(image);
+          renderList();
+          fileInput.value = '';
+          clearPreview();
+          altInput.value = '';
+          say(uploadMsg, `Added to ${STYLES[category]}. It's on the gallery page now.`, 'ok');
+        } catch (err) {
+          if (err.status === 401) signOut('The password has changed. Sign in again.');
+          else say(uploadMsg, err.message, 'error');
+        } finally {
+          setBusy(uploadBtn);
+        }
+      });
+
+      // ── Added photos ──
+      function renderList() {
+        countEl.textContent = images.length ? `(${images.length})` : '';
+        list.replaceChildren();
+        if (!images.length) {
+          const empty = document.createElement('p');
+          empty.className = 'muted empty';
+          empty.textContent = 'No photos added yet. Photos you add will appear here.';
+          list.append(empty);
+          return;
+        }
+        Object.entries(STYLES).forEach(([key, label]) => {
+          const group = images.filter(image => image.category === key);
+          if (!group.length) return;
+          const title = document.createElement('h3');
+          title.className = 'group-title';
+          title.textContent = `${label} · ${group.length}`;
+          const grid = document.createElement('ul');
+          grid.className = 'thumbs';
+          group.forEach(image => grid.append(renderItem(image)));
+          list.append(title, grid);
+        });
+      }
+
+      function renderItem(image) {
+        const item = document.createElement('li');
+        item.className = 'thumb';
+
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.alt = image.alt;
+        img.width = image.width;
+        img.height = image.height;
+        img.src = image.src;
+
+        const alt = document.createElement('p');
+        alt.className = 'thumb-alt';
+        alt.textContent = image.alt;
+        alt.title = image.alt;
+
+        const meta = document.createElement('div');
+        meta.className = 'thumb-meta';
+        const date = document.createElement('span');
+        date.textContent = new Date(image.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'thumb-delete';
+        remove.textContent = 'Delete';
+        remove.setAttribute('aria-label', `Delete: ${image.alt}`);
+        remove.addEventListener('click', () => deleteImage(image, remove));
+        meta.append(date, remove);
+
+        item.append(img, alt, meta);
+        return item;
+      }
+
+      async function deleteImage(image, button) {
+        if (!confirm(`Remove this photo from the gallery?\n\n"${image.alt}"`)) return;
+        say(listMsg, '');
+        setBusy(button, 'Deleting…');
+        try {
+          await api(`/api/admin/images/${encodeURIComponent(image.id)}`, { method: 'DELETE' });
+        } catch (err) {
+          if (err.status === 401) return signOut('The password has changed. Sign in again.');
+          if (err.status !== 404) { // 404: already gone, so just drop it from the list
+            setBusy(button);
+            say(listMsg, err.message, 'error');
+            return;
+          }
+        }
+        images = images.filter(other => other.id !== image.id);
+        renderList();
+        say(listMsg, 'Photo removed from the gallery.', 'ok');
+      }
+
+      // ── Start: reuse this tab's password if there is one ──
+      if (password) {
+        loadImages()
+          .then(showApp)
+          .catch(err => signOut(err.status === 401 ? '' : err.message));
+      } else {
+        showLogin();
+      }
+    })();
+  </script>
+</body>
+
+</html>

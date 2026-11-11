@@ -1,0 +1,4 @@
+# Local Cloudflare development files (wrangler pages dev). Never commit these:
+# .dev.vars holds secrets such as ADMIN_PASSWORD.
+.wrangler/
+.dev.vars
