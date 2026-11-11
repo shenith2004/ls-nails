@@ -46,7 +46,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="preconnect" href="https://unpkg.com">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
   <!-- Structured data: gallery page + breadcrumbs -->
@@ -90,7 +90,7 @@
         "telephone": "+94712081576",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "121/4 A, Thaladuwa Road",
+          "streetAddress": "Archbishop Nicholas Marcus Fernando Mawatha",
           "addressLocality": "Negombo",
           "addressRegion": "Western Province",
           "postalCode": "11500",
@@ -104,7 +104,10 @@
   <!-- Fonts & icons -->
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <!-- Icons are decorative, so their stylesheet loads without blocking the first paint -->
+  <link rel="preload" as="style" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"></noscript>
   <link rel="stylesheet" href="css/output.css?v=20261013">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -579,8 +582,20 @@
       color: rgba(247, 243, 237, 0.45);
     }
 
-    .lux-footer-bottom p {
+    .lux-footer-bottom p,
+    .lux-footer-bottom address {
       margin: 0;
+      font-style: normal;
+    }
+
+    .lux-footer-bottom address a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .lux-footer-bottom address a:hover {
+      color: #D8B894;
     }
 
     @media (min-width: 640px) {
@@ -638,7 +653,8 @@
         </div>
         <div class="gsap-header opacity-0 lg:pb-2 max-w-sm">
           <p class="text-sm sm:text-base text-theme-text/55 leading-relaxed mb-5">
-            Three distinct design languages — each crafted with the same precision. Filter by style or browse the full
+            Real sets from our Negombo nail salon, in three distinct design languages — each crafted with the same
+            precision. Filter by style or browse the full
             archive below.
           </p>
           <div id="filter-tabs" class="filter-tabs">
@@ -1027,6 +1043,7 @@
             <li><a href="./#portfolio">Portfolio</a></li>
             <li><a href="gallery.html" aria-current="page">Gallery</a></li>
             <li><a href="./#studio">Studio</a></li>
+            <li><a href="./#faq">FAQ</a></li>
             <li><a href="https://wa.me/94712081576" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
           </ul>
         </nav>
@@ -1036,7 +1053,7 @@
 
       <div class="lux-footer-bottom">
         <p>&copy; <span id="footer-year"></span> LS Nails Studio. All rights reserved.</p>
-        <p>Negombo, Sri Lanka &middot; Mon–Sat 9–6</p>
+        <address>LS Nails Studio, Archbishop Nicholas Marcus Fernando Mawatha, Negombo 11500 &middot; <a href="tel:+94712081576">+94 71 208 1576</a> &middot; Mon–Sat 9–6</address>
       </div>
     </div>
   </footer>

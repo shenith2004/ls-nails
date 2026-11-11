@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from html import unescape
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 
@@ -41,6 +42,30 @@ def local_images_exist(html):
             if p.startswith('images/'):
                 paths.append(p)
     return all(exists(*p.split('/')) for p in paths)
+
+
+def ld_nodes(blocks):
+    """Flatten every JSON-LD block (and its @graph) into a list of nodes."""
+    nodes = []
+    for b in blocks or []:
+        nodes.extend(b.get('@graph', [b]))
+    return nodes
+
+
+def has_type(node, t):
+    types = node.get('@type', [])
+    return t in (types if isinstance(types, list) else [types])
+
+
+def faq_matches_page(html, blocks):
+    """Every FAQPage question in the schema must also be a visible FAQ heading on the page."""
+    questions = [q['name'] for n in ld_nodes(blocks) if has_type(n, 'FAQPage') for q in n.get('mainEntity', [])]
+    visible = [unescape(q.strip()) for q in re.findall(r'<h3 class="faq-q">(.*?)</h3>', html, re.S)]
+    return len(questions) >= 5 and questions == visible
+
+
+def business_node(blocks):
+    return next((n for n in ld_nodes(blocks) if has_type(n, 'NailSalon')), {})
 
 
 content = read('index.html')
@@ -93,12 +118,27 @@ checks = {
     'index_geo_tags': 'name="geo.placename" content="Negombo"' in content,
     'index_json_ld_valid': bool(index_ld),
     'index_nail_salon_schema': 'NailSalon' in content and 'BeautySalon' in content,
-    'index_schema_real_address': '"streetAddress": "121/4 A, Thaladuwa Road"' in content and 'Sweet Home' not in content,
+    'index_schema_real_address': '"streetAddress": "Archbishop Nicholas Marcus Fernando Mawatha"' in content and 'Sweet Home' not in content,
+    'gallery_schema_real_address': '"streetAddress": "Archbishop Nicholas Marcus Fernando Mawatha"' in content_gallery,
+    'no_old_thaladuwa_address': not any('Thaladuwa' in page or '121/4' in page for page in (content, content_gallery)),
     'index_schema_opening_hours': 'OpeningHoursSpecification' in content,
     'index_schema_services': 'OfferCatalog' in content,
     'index_schema_email_correct': 'pleesha59@gmail.com' in content,
     'gallery_json_ld_valid': bool(gallery_ld),
     'gallery_breadcrumb_schema': 'BreadcrumbList' in content_gallery,
+    'index_schema_hasmap_matches_visit_link': f'href="{business_node(index_ld).get("hasMap", "missing")}"' in content,
+    'index_schema_area_served_nearby': len(business_node(index_ld).get('areaServed', [])) >= 5,
+
+    # On-page content for local search
+    'index_title_nail_salon_negombo': 'Nail Salon in Negombo' in title(content),
+    'index_services_h2_keywords': 'Nails, lashes &amp; waxing' in content,
+    'index_hero_sub_mentions_negombo': re.search(r'id="hero-sub".*?Negombo.*?</p>', content, re.S) is not None,
+    'index_faq_section': 'id="faq"' in content and content.count('class="faq-item') >= 5,
+    'index_faq_schema_matches_page': faq_matches_page(content, index_ld),
+    'index_hours_visible': 'Mon–Sat, 9:00 am – 6:00 pm' in content,
+    'index_footer_nap': '<address>LS Nails Studio, Archbishop Nicholas Marcus Fernando Mawatha, Negombo 11500' in content and 'href="tel:+94712081576"' in content,
+    'gallery_footer_nap': '<address>LS Nails Studio, Archbishop Nicholas Marcus Fernando Mawatha, Negombo 11500' in content_gallery,
+    'gallery_intro_mentions_negombo': 'Real sets from our Negombo nail salon' in content_gallery,
 
     # Images: optimised, described, sized
     'index_images_webp': 'images/web/1_web-1400.webp' in content and 'src="images/3.jpeg"' not in content,
@@ -112,6 +152,10 @@ checks = {
     'index_scripts_deferred': not re.search(r'<script src=', content),
     'gallery_scripts_deferred': not re.search(r'<script src=', content_gallery),
     'icons_single_stylesheet': 'phosphor-icons/web@2.1.1/src/regular/style.css' in content and 'src/index.js' not in content,
+    'icons_not_render_blocking': all(
+        'rel="stylesheet" href="https://unpkg.com/@phosphor' not in re.sub(r'<noscript>.*?</noscript>', '', page, flags=re.S)
+        and 'rel="preload" as="style" href="https://unpkg.com/@phosphor' in page
+        for page in (content, content_gallery)),
 
     # Footer
     'index_footer_present': '<footer class="lux-footer"' in content,

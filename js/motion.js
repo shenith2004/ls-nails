@@ -135,7 +135,7 @@
   }
 
   /* ── 3. Headings rise word by word ───────────────────────── */
-  $$('#services h2, #portfolio h2, .studio-title, .contact-title').forEach((heading) => {
+  $$('#services h2, #portfolio h2, .studio-title, .faq-title, .contact-title').forEach((heading) => {
     heading.classList.remove('gsap-reveal');
     const words = splitWords(heading);
     gsap.set(words, { yPercent: 130 });
@@ -189,6 +189,9 @@
       }),
     }),
   });
+
+  // Opening or closing an FAQ answer changes the page height, so re-measure scroll-linked effects below it.
+  $$('.faq-item').forEach((item) => item.addEventListener('toggle', () => ScrollTrigger.refresh()));
 
   /* ── 6. Portfolio: card grows in, panels unveil ──────────── */
   const portfolio = $('#portfolio');
