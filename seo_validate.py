@@ -135,7 +135,7 @@ checks = {
     'index_hero_sub_mentions_negombo': re.search(r'id="hero-sub".*?Negombo.*?</p>', content, re.S) is not None,
     'index_faq_section': 'id="faq"' in content and content.count('class="faq-item') >= 5,
     'index_faq_schema_matches_page': faq_matches_page(content, index_ld),
-    'index_hours_visible': 'Mon–Sat, 9:00 am – 6:00 pm' in content,
+    'index_hours_visible': 'Monday to Saturday, 9:00 am to 6:00 pm' in content,
     'index_footer_nap': '<address>LS Nails Studio, Archbishop Nicholas Marcus Fernando Mawatha, Negombo 11500' in content and 'href="tel:+94712081576"' in content,
     'gallery_footer_nap': '<address>LS Nails Studio, Archbishop Nicholas Marcus Fernando Mawatha, Negombo 11500' in content_gallery,
     'gallery_intro_mentions_negombo': 'Real sets from our Negombo nail salon' in content_gallery,
