@@ -9,7 +9,7 @@ This guide lives in `functions/` on purpose. Cloudflare Pages runs this folder a
 - `gallery.html` still contains its original photos. They are unchanged and stay in the HTML for SEO.
 - Photos added later are stored in a **Cloudflare D1** database. A short script in `gallery.html` fetches them from `/api/gallery` and puts them at the **top of their style's grid, newest first**, using the same markup. The counts, filters and lightbox all include them.
 - If the database isn't connected or the API fails, the gallery simply shows its built-in photos and nothing breaks.
-- **`/admin/`** is a password-protected page for uploading and deleting photos, and it works on a phone. There's no description to type: each photo's alt text comes from its style, e.g. "Graphic nail art by LS Nails Studio, Negombo".
+- **`/admin/`** is a password-protected page for uploading and deleting photos, and it works on a phone. You can pick several photos at once (up to 30 per batch); each batch goes into one style and appears on the gallery in the order shown. There's no description to type: each photo's alt text comes from its style, e.g. "Graphic nail art by LS Nails Studio, Negombo".
 - Every photo is cropped in the browser to the gallery's tall 9:16 shape and sized 1080 × 1920, like the existing photos. Drag the preview to choose which part shows. Photos are saved as WebP (or JPEG on browsers without WebP support), which also strips camera metadata such as GPS location. A photo saved in another shape is still shown at 9:16 in the grid.
 
 ## One-time setup (Cloudflare dashboard)
